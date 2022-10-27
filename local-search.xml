@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Fluid启用Giscus评论系统</title>
+    <link href="/1.html"/>
+    <url>/1.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a class="markdownIt-Anchor" href="#前言">#</a> 前言</h2><p>想给 Hexo 博客加一个 Giscus 评论系统，使用的 Fluid 主题又刚好集成了该评论系统，水一篇博文</p><h2 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作">#</a> 准备工作</h2><p>Giscus 评论系统需要一个 Github 仓库才能使用，无需自建服务，轻量化系统</p><p>首先进入仓库，点击设置<br><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271443147.webp" alt=""></p><p>下滑，找到  <code>Discussions </code>  将其打钩选中</p><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271445349.webp" alt=""></p><p>然后在 Github 内安装 Giscus 插件<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="Giscus插件安装 https://github.com/apps/giscus">[2]</span></a></sup>  <a href="https://github.com/apps/giscus">插件安装</a></p><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271446184.webp" alt=""></p><h2 id="官方页面生成配置信息"><a class="markdownIt-Anchor" href="#官方页面生成配置信息">#</a> 官方页面生成配置信息</h2><p>打开<a href="https://giscus.app/zh-CN"> Giscus 官方页面</a>，开始配置仓库地址：Giscus<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Giscus https://giscus.app/zh-CN">[1]</span></a></sup></p><p>在仓库选项下，输入要使用的仓库路径： <code>github用户名/仓库名</code> <br><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271449711.webp" alt=""></p><p>页面 ↔️ discussion 映射关系这个按需选择最适合自己的那个，这里笔者选择了第二个<br><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271451880.webp" alt=""></p><p>Discussion 分类则按照官方推荐即可<br><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271454342.webp" alt=""></p><p>剩下的默认或者按需选择即可</p><p>此刻，giscus 已经按照你填写的内容生成了配置文件</p><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271457472.webp" alt=""></p><p>将其填入 fluid 配置文件即可开启使用</p><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271507488.webp" alt=""></p><p>评论后还有邮件通知<br><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271508089.webp" alt=""></p><h2 id="启用效果"><a class="markdownIt-Anchor" href="#启用效果">#</a> 启用效果:</h2><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271509444.webp" alt=""></p><h2 id="收尾"><a class="markdownIt-Anchor" href="#收尾">#</a> 收尾</h2><p>Giscus 评论系统有一个优点，但也是一个小缺点<br>评论只能登录授权 Github 后才能进行评论，无法匿名评论之类，适合开发者使用<br>而且支持 Markdown 语法，评论存储在 Github，无需服务器维护，属于是用上了就不用管了系列</p><h2 id="参考"><a class="markdownIt-Anchor" href="#参考">#</a> 参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>Giscus <a href="https://giscus.app/zh-CN">https://giscus.app/zh-CN</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>Giscus 插件安装 <a href="https://github.com/apps/giscus">https://github.com/apps/giscus</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>博客</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记录Hexo更换文章链接</title>
+    <link href="/2551217376.html"/>
+    <url>/2551217376.html</url>
+    
+    <content type="html"><![CDATA[<h2>前言</h2>hexo的文章链接，长且繁琐，如果文章标题带有中文，复制出来及其不美观<p>百度搜索之后找到一个插件 <span class="label label-success">hexo-abbrlink</span> 可以直接 NPM 命令安装</p><h2>安装</h2>安装指令：<p class="note note-info">npm install hexo-abbrlink --save</p><h2>更改配置文件</h2>安装过后直接打开博客根目录下的 `_config.yml` 替换`permalink`为 ：<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> posts/:abbrlink.html <br><span class="hljs-symbol">abbrlink:</span><br><span class="hljs-symbol">    alg:</span> crc32  <br><span class="hljs-symbol">    rep:</span> hex   <br></code></pre></td></tr></table></figure><p><img src="https://raw.githubusercontent.com/strawdc/img/master/img/202210271209666.webp" alt=""></p><p>即可成功更改永久链接</p><p>其中 <code>alg</code>  与 <code>rep</code>  的值可以更改，下面附官方文档<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="hexo-abbrlink官方文档 https://github.com/Rozbo/hexo-abbrlink">[1]</span></a></sup></p><blockquote><p>crc16 &amp; hex <a href="https://post.zz173.com/posts/66c8.html">https://post.zz173.com/posts/66c8.html</a></p><p>crc16 &amp; dec <a href="https://post.zz173.com/posts/65535.html">https://post.zz173.com/posts/65535.html</a></p><p>crc32 &amp; hex <a href="https://post.zz173.com/posts/8ddf18fb.html">https://post.zz173.com/posts/8ddf18fb.html</a></p><p>crc32 &amp; dec <a href="https://post.zz173.com/posts/1690090958.html">https://post.zz173.com/posts/1690090958.html</a></p></blockquote><h2>应用插件</h2>生成后需要先`hexo clean`清除一下Hexo的缓存，然后再`Hexo s`进行本地预览<p>插件应用后会在站点根目录 <code>\source\_posts\</code>  路径内的.md 文件，标题头内生成一个 <code>abbrlink: xxxxx</code>  的数据，这就是这篇文章的唯一链接</p><p>笔者对照文档修改：</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-symbol">permalink:</span> :abbrlink.html  <span class="hljs-meta"># 此处可以自己设置，也可以直接使用 :/abbrlink</span><br><span class="hljs-symbol">abbrlink:</span><br><span class="hljs-symbol">    alg:</span> crc32   <span class="hljs-meta">#算法： crc16(default) and crc32</span><br><span class="hljs-symbol">    rep:</span> dec     <span class="hljs-meta">#进制： dec(default) and hex</span><br></code></pre></td></tr></table></figure><h2 id="参考"><a class="markdownIt-Anchor" href="#参考">#</a> 参考</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>hexo-abbrlink 官方文档 <a href="https://github.com/Rozbo/hexo-abbrlink">https://github.com/Rozbo/hexo-abbrlink</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>博客</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>记，更换Hexo</title>
+    <link href="/62868007.html"/>
+    <url>/62868007.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="记更换hexo"><a class="markdownIt-Anchor" href="#记更换hexo">#</a> 记，更换 Hexo</h1><p>搭建了 Hexo，也是不想维护服务器了，博客部署在 GitHub pages</p><p>博客来来回回更换了好几次，先是 WordPress，又换成了 Typecho，再是 Gridea，发现同步到 Github 不合适，又换成了现在的 Hexo，之前的博文也不想同步了，来来回回的折腾，也没正经弄过</p><p>也是打算当成博客写的</p><p><img src="https://raw.githubusercontent.com/zreo09/zreo09.github.io/main/image/202210271410191.webp" alt=""></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+      <tag>Fluid</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>时隔8个月更新一下博文</title>
+    <link href="/999193260.html"/>
+    <url>/999193260.html</url>
+    
+    <content type="html"><![CDATA[<p>8 个月没写博客，今天重新部署了一下系统环境，终于能重新连接上了</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

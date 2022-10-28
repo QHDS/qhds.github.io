@@ -23,6 +23,25 @@
   
   
   <entry>
+    <title>JS学习记录 交换两个变量值</title>
+    <link href="/902688608.html"/>
+    <url>/902688608.html</url>
+    
+    <content type="html"><![CDATA[<h2 id="交换思路"><a class="markdownIt-Anchor" href="#交换思路">#</a> 交换思路</h2><p>首先是交换前的思路：需要把 A1 变量值交换到 A2 变量值，A2 变量值交换到 A1 内，那就需要有个第三者来辅助这俩交换</p><h2 id="实际操作"><a class="markdownIt-Anchor" href="#实际操作">#</a> 实际操作</h2><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-comment">#首先声明三个变量：A1,A2,kong</span><br><span class="hljs-comment"># kong变量只声明 不赋值</span><br>var <span class="hljs-built_in">A1</span> = <span class="hljs-number">1</span>,<br><span class="hljs-built_in">A2</span> = <span class="hljs-number">2</span>;<br>var kong;<br><br><br><span class="hljs-comment">#然后将A1内的值，先交换到kong内</span><br>kong = <span class="hljs-built_in">A1</span><br><span class="hljs-comment">#此时A1是空出来的状态，那就把A2塞到A1里边去</span><br><span class="hljs-built_in">A2</span> = <span class="hljs-built_in">A1</span><br><span class="hljs-comment">#现在A2空出来了 kong里边还蹲着原先A1的值，把他送进A2里边</span><br><span class="hljs-built_in">A2</span> = kong<br><br><span class="hljs-comment">#最后输出到控制台看看</span><br><br>console.log(<span class="hljs-built_in">A1</span>)<br>console.log(<span class="hljs-built_in">A2</span>)<br></code></pre></td></tr></table></figure><h2 id="结果"><a class="markdownIt-Anchor" href="#结果">#</a> 结果</h2><p>结果图：<br><img src="http://image.dcaoao.com/image/202210281458332.webp" alt=""></p><h2 id="笔记-变量名命名规范"><a class="markdownIt-Anchor" href="#笔记-变量名命名规范">#</a> 笔记 变量名命名规范:</h2><pre><code class="hljs"> 严格区分大小写 不能以数字开头 只能大写小写下划线和$ 不能是关键词或者保留字 var for之类 变量名必须有意义 实在不行用翻译网站吧 遵循驼峰命名法 首字母小写 后边的统统大写 nameTopRight name有特殊含义，尽量不要使用为什么需要变量：因为有数据需要保存变量是什么：变量是一个容器，存放数据，方便调用变量的本质是什么：申请内存中的一块空间变量怎么使用：先声明，再赋值什么是变量的初始化：声明并赋值就是初始化变量命名规范？：看上边交换两个变量的思路？，需要一个空变量来辅助，1交换到2 3交换到1 最后2交换到3来实现1和3的变量值互换</code></pre><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-meta">#JS的变量数据类型，只有在程序运行中才可以确定类型，根据变量值来确定的</span><br><br><span class="hljs-built_in">var</span> A1 = <span class="hljs-number">10</span>；  <span class="hljs-meta">#这是一个数字型</span><br><span class="hljs-built_in">var</span> A2 = <span class="hljs-string">&#x27;阿巴阿巴&#x27;</span>; <span class="hljs-meta">#这是一个字符串类型</span><br></code></pre></td></tr></table></figure><p>但是，在 JS 中，JS 是动态语言，变量的数据类型是可以变化的</p><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-built_in">var</span> A1 = <span class="hljs-number">10</span>；  <span class="hljs-meta">#这是一个数字型</span><br>A1 = <span class="hljs-string">&#x27;阿巴阿巴&#x27;</span>;<br></code></pre></td></tr></table></figure><p>这样 A1 变量就会更改为字符串类型</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>学习</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>记录Hexo更换文章链接</title>
     <link href="/2551217376.html"/>
     <url>/2551217376.html</url>

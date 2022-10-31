@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zreo09/zreo09.github.io/image/202210282111277.webp">
 <meta property="article:published_time" content="2022-10-27T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-30T12:58:45.535Z">
+<meta property="article:modified_time" content="2022-10-31T14:16:47.006Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.3k 字
+          7.7k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          53 分钟
+          65 分钟
         
       </span>
     
@@ -409,6 +409,45 @@
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs autoit">//逻辑或 ||  一真全真 全假则假<br>console.<span class="hljs-built_in">log</span>(<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span> || <span class="hljs-number">2</span> &gt; <span class="hljs-number">1</span>) //<span class="hljs-literal">false</span> || <span class="hljs-literal">true</span>  结果为<span class="hljs-literal">true</span><br>console.<span class="hljs-built_in">log</span>(<span class="hljs-number">1</span> &gt; <span class="hljs-number">2</span> || <span class="hljs-number">0</span> &gt; <span class="hljs-number">1</span>) //<span class="hljs-literal">false</span> || <span class="hljs-literal">true</span>  结果为<span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
 <h3 id="逻辑非"><a class="markdownIt-Anchor" href="#逻辑非">#</a> 逻辑非</h3>
 <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//逻辑非 not ！   取反符，布尔值的</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(!<span class="hljs-literal">true</span>);    <span class="hljs-comment">//不是true  输出结果为false</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(!<span class="hljs-literal">false</span>);    <span class="hljs-comment">//同理 不是false 输出true</span><br></code></pre></td></tr></table></figure>
+<h2 id="1031笔记"><a class="markdownIt-Anchor" href="#1031笔记">#</a> 10.31 笔记</h2>
+<h2 id="短路运算-逻辑中断"><a class="markdownIt-Anchor" href="#短路运算-逻辑中断">#</a> 短路运算 逻辑中断</h2>
+<h3 id="短路运算-逻辑与"><a class="markdownIt-Anchor" href="#短路运算-逻辑与">#</a> 短路运算 逻辑与</h3>
+<p>在逻辑与的短路运算中，如果表达式 1 为真，则返回表达式 2</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-literal">true</span> &amp;&amp; <span class="hljs-literal">false</span>)  <span class="hljs-comment">//这样的结果是false</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-number">123</span> &amp;&amp; <span class="hljs-number">456</span>)  <span class="hljs-comment">//这样的结果是456</span><br></code></pre></td></tr></table></figure>
+<p>如果表达式 1 为假，则返回表达式 1，空值同理</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">console</span>.log(<span class="hljs-number">0</span> &amp;&amp; <span class="hljs-number">456</span>)  //返回<span class="hljs-number">0</span><br><span class="hljs-attribute">console</span>.log(<span class="hljs-number">0</span> &amp;&amp; <span class="hljs-number">132</span> * <span class="hljs-number">456</span> - <span class="hljs-number">789</span>)  //这样的结果也是<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<h3 id="短路运算-逻辑或"><a class="markdownIt-Anchor" href="#短路运算-逻辑或">#</a> 短路运算 逻辑或</h3>
+<p>逻辑或的短路运算  如果表达式 1 为真，则直接返回表达式 1，后面的表达式不参与运算<br>
+如果表达式 1 为假，那后面的表达式则参与运算，返回表达式 2</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">console</span>.log(<span class="hljs-number">123</span> || <span class="hljs-number">456</span>)  //结果<span class="hljs-number">123</span><br><span class="hljs-attribute">console</span>.log(<span class="hljs-number">0</span> || <span class="hljs-number">456</span> + <span class="hljs-number">1</span>)  //结果<span class="hljs-number">457</span><br></code></pre></td></tr></table></figure>
+<p>逻辑或短路运算案例</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> my1 = <span class="hljs-number">0</span>;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-number">123</span> || my1++)  <span class="hljs-comment">//因为表达式1为真，则表达式2直接不参与运算，此时输出123</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(my1)            <span class="hljs-comment">//0</span><br></code></pre></td></tr></table></figure>
+<h2 id="赋值运算符"><a class="markdownIt-Anchor" href="#赋值运算符">#</a> 赋值运算符</h2>
+<p>自增运算符，每次自增只能自增 1<br>
+my1++   ++my1 之类</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">var my1 <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-comment">;  #这个叫直接赋值</span><br></code></pre></td></tr></table></figure>
+<p>设定赋值运算符，可以做到每次 + - * / 后再赋值</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">var</span> my2 = <span class="hljs-number">1</span>;<br><br><span class="hljs-attribute">my2</span> += <span class="hljs-number">5</span>;         #自增<span class="hljs-number">5</span>   my2 = my2 + <span class="hljs-number">5</span><br><span class="hljs-attribute">console</span>.log(my2)  #结果为<span class="hljs-number">6</span><br><span class="hljs-attribute">my2</span> -= <span class="hljs-number">5</span>          #自减<span class="hljs-number">5</span>  my2 = my2 -<span class="hljs-number">5</span><br><span class="hljs-attribute">console</span>.log(my2)  #结果为<span class="hljs-number">1</span><br><span class="hljs-attribute">my2</span> *= <span class="hljs-number">6</span>;         #每次乘<span class="hljs-number">6</span>后赋值 my2 = my2 * <span class="hljs-number">6</span><br><span class="hljs-attribute">console</span>.log(my2)  #结果为<span class="hljs-number">6</span><br><span class="hljs-attribute">my2</span> /=<span class="hljs-number">2</span>;          #每次除<span class="hljs-number">2</span>   my2 = my2 / <span class="hljs-number">2</span><br><span class="hljs-attribute">console</span>.log(my2)  #结果为<span class="hljs-number">3</span><br><span class="hljs-attribute">my2</span> %=<span class="hljs-number">2</span>;          #以<span class="hljs-number">2</span>取余  my2 = my2 % <span class="hljs-number">2</span><br><span class="hljs-attribute">console</span>.log(my2)  #结果为<span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="运算符优先级"><a class="markdownIt-Anchor" href="#运算符优先级">#</a> 运算符优先级</h2>
+<p>简单来说还是先乘除 后加减 括号优先 逻辑与在前 逻辑或在后</p>
+<p><img src="https://cdn.jsdelivr.net/gh/zreo09/zreo09.github.io/image/202210311303456.webp" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>运算符优先级</p>
+<ol>
+<li>小括号  <code>()</code> <br>
+ 2. 一元运算符   <code>++ -- !</code> <br>
+3. 算数运算符  先  <code>* / % </code> 后  <code>+ -</code> <br>
+4. 关系运算符   <code>&gt; &gt;= &lt; &lt;=num</code> <br>
+5. 相等运算符   <code>== != === !==</code> <br>
+6. 逻辑运算符  先  <code>&amp;&amp;</code>  后 <code> ||</code> <br>
+7. 赋值运算符   <code>=</code> <br>
+8. 逗号运算符   <code>, </code></li>
+</ol>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">// 运算符优先级案例</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-literal">false</span> ||         <span class="hljs-literal">true</span>     &amp;&amp;         <span class="hljs-literal">true</span>    &amp;&amp; <span class="hljs-literal">true</span>)<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-number">4</span> &gt;= <span class="hljs-number">6</span> || <span class="hljs-string">&#x27;人&#x27;</span> != <span class="hljs-string">&#x27;阿凡达&#x27;</span> &amp;&amp; !(<span class="hljs-number">12</span> * <span class="hljs-number">2</span> ==<span class="hljs-number">144</span>) &amp;&amp; <span class="hljs-literal">true</span>)  <span class="hljs-comment">//结果为true，因为逻辑与优先级比逻辑或高</span><br><br><span class="hljs-keyword">var</span> num = <span class="hljs-number">10</span>;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-number">5</span> == num / <span class="hljs-number">2</span> &amp;&amp; (<span class="hljs-number">2</span> + <span class="hljs-number">2</span> * num).toString() === <span class="hljs-string">&#x27;22&#x27;</span>)<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(   <span class="hljs-literal">true</span>      &amp;&amp;             <span class="hljs-literal">true</span>                 )      <span class="hljs-comment">//结果为true</span><br></code></pre></td></tr></table></figure>
+<h2 id="if语法的结构"><a class="markdownIt-Anchor" href="#if语法的结构">#</a> IF 语法的结构</h2>
+<p>if 语句中 如果表达式为真，则运行 if 大括号内的语句<br>
+如果表达式为假，则直接跳过该 if 语句内的表达式运行<br>
+ if 语句后面可以跟一个 else 语句，意思是 if 表达式为否时，改语句执行</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">var</span> <span class="hljs-variable">age</span> = <span class="hljs-function"><span class="hljs-title">prompt</span>(<span class="hljs-string">&#x27;请输入您的年龄&#x27;</span>)</span><br><span class="hljs-variable"><span class="hljs-keyword">if</span></span> (<span class="hljs-variable">age</span> &gt;= <span class="hljs-number">18</span>) &#123;    <span class="hljs-comment">//如果 age大于等于18</span><br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;恭喜您,允许进入网吧&#x27;</span>)</span><br>&#125; <span class="hljs-variable"><span class="hljs-keyword">else</span></span> &#123;        <span class="hljs-comment">//else的意思是 否则</span><br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;未成年不准进入网吧&#x27;</span>)</span><br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             

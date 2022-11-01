@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/zreo09/zreo09.github.io/image/202210282111277.webp">
 <meta property="article:published_time" content="2022-10-27T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-10-31T14:16:47.006Z">
+<meta property="article:modified_time" content="2022-11-01T14:21:27.218Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.7k 字
+          9.1k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          65 分钟
+          76 分钟
         
       </span>
     
@@ -447,7 +447,41 @@ my1++   ++my1 之类</p>
 <p>if 语句中 如果表达式为真，则运行 if 大括号内的语句<br>
 如果表达式为假，则直接跳过该 if 语句内的表达式运行<br>
  if 语句后面可以跟一个 else 语句，意思是 if 表达式为否时，改语句执行</p>
+<h3 id="if与else"><a class="markdownIt-Anchor" href="#if与else">#</a> if 与 else</h3>
 <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable">var</span> <span class="hljs-variable">age</span> = <span class="hljs-function"><span class="hljs-title">prompt</span>(<span class="hljs-string">&#x27;请输入您的年龄&#x27;</span>)</span><br><span class="hljs-variable"><span class="hljs-keyword">if</span></span> (<span class="hljs-variable">age</span> &gt;= <span class="hljs-number">18</span>) &#123;    <span class="hljs-comment">//如果 age大于等于18</span><br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;恭喜您,允许进入网吧&#x27;</span>)</span><br>&#125; <span class="hljs-variable"><span class="hljs-keyword">else</span></span> &#123;        <span class="hljs-comment">//else的意思是 否则</span><br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;未成年不准进入网吧&#x27;</span>)</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="if-else-if"><a class="markdownIt-Anchor" href="#if-else-if">#</a> if else if</h3>
+<p>如果第一个 if 没有满足条件，则跳过这个 if 语句，去执行下一个，如果还是不满足，则继续下一个 if</p>
+<p>多选一的关系<br>
+如果条件表达式 1 不满足，则检查条件表达式 2, 如果条件表达式 2 也不满足，则执行条件表达式 3</p>
+<p>如果所有条件表达式都不满足，那执行结尾的 else</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-variable"><span class="hljs-keyword">if</span></span> (<span class="hljs-number">1</span> == <span class="hljs-number">2</span>) &#123;<br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;1不等于2&#x27;</span>)</span><br>&#125; <span class="hljs-variable"><span class="hljs-keyword">else</span></span> <span class="hljs-variable"><span class="hljs-keyword">if</span></span> (<span class="hljs-number">2</span> == <span class="hljs-number">3</span>) &#123;<br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;2等于2&#x27;</span>)</span><br>&#125; <span class="hljs-variable"><span class="hljs-keyword">else</span></span> &#123;<br>    <span class="hljs-function"><span class="hljs-title">alert</span>(<span class="hljs-string">&#x27;都不满足&#x27;</span>)</span><br>&#125; <br><br></code></pre></td></tr></table></figure>
+<h2 id="三元表达式"><a class="markdownIt-Anchor" href="#三元表达式">#</a> 三元表达式</h2>
+<p>三元表达式中的条件判断如果为 true 则返回表达式 1 , 如果判断为 false 则返回表达式 2<br>
+ 也是多选一的关系</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-keyword">var</span> <span class="hljs-built_in">num</span> = <span class="hljs-number">10</span>;<br><span class="hljs-keyword">var</span> res <span class="hljs-built_in">num</span> &gt; <span class="hljs-number">5</span> ? <span class="hljs-string">&#x27;是的&#x27;</span> : <span class="hljs-string">&#x27;不是&#x27;</span><br>alert (res)    <span class="hljs-comment">//因为num大于10,结果为true 所以返回  是的</span><br><br></code></pre></td></tr></table></figure>
+<h2 id="switch语句"><a class="markdownIt-Anchor" href="#switch语句">#</a> Switch 语句</h2>
+<p>Switch 语句也是多选一的关系，但是适合条件比较多的时候<br>
+如果 switch 中的值与 case 后的结果符合，则执行符合的那一条表达式<br>
+如果都不符合，则执行最后的 default<br>
+switch 表达式的值与 case 的值为全等的关系 === 也就是说数据类型和内容必须完全相等才可以<br>
+如果没有写 break 来进行结束，则会连带执行下一条表达式，不管符不符合<br>
+在实际开发中，switch 表达式一般单独写成一个值</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">var</span> my1 = prompt(<span class="hljs-string">&#x27;请输入水果名称&#x27;</span>)<br><span class="hljs-keyword">switch</span> (my1) &#123;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;苹果&#x27;</span>:<br>        alert (<span class="hljs-string">&#x27;苹果一块大批发啦&#x27;</span>)<br>    <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;香蕉&#x27;</span>: <br>        alert(<span class="hljs-string">&#x27;香蕉包邮到家门口啦&#x27;</span>)<br>    <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;菠萝&#x27;</span>:<br>        alert(<span class="hljs-string">&#x27;菠萝白送啦&#x27;</span>)<br>    <span class="hljs-keyword">break</span>;<br>    <span class="hljs-keyword">case</span> a1:<br>        alert(<span class="hljs-string">&#x27;这是一个al&#x27;</span>)<br>    <span class="hljs-keyword">break</span>;<br><br>    <span class="hljs-keyword">default</span>:alert(<span class="hljs-string">&#x27;没有符合条件的,下次一定&#x27;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>运行效果<br>
+<img src="https://cdn.jsdelivr.net/gh/zreo09/zreo09.github.io/image/202211012203507.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="for循环"><a class="markdownIt-Anchor" href="#for循环">#</a> for 循环</h2>
+<p 循环体="">循环分为四大部分<br>
+ for (初始化变量；条件表达式；操作表达式)</p>
+<p>初始化变量：在循环中只会执行一次，使用 var 声明的一个普通变量 一般作为计数器使用<br>
+条件表达式：决定每一次循环后，循环是否会继续执行，也就是结束条件<br>
+操作表达式：每次循环都会执行一次，注意是每次循环，配合初始化变量进行更新 (一般递增或递减)</p>
+<p>执行顺序:<br>
+1. 首先执行一次 <code>初始化变量</code> <br>
+ 2. 检查 <code>条件表达式</code> 来确定是否要执行循环<br>
+ 3. 如果 <code>条件表达式</code> 符合条件，则执行一次 <code>循环体</code> <br>
+ 4. 执行过 <code>循环体</code> 后，再去执行一次 <code>操作表达式</code> <br>
+ 5. 一套循环已经完成，接下来继续检查 <code>条件表达式</code> 是否满足条件，满足条件则继续循环</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//解析 执行i等于1 然后检查i是否小于等于100</span><br><span class="hljs-comment">//如果小于100 执行一次控制台输出123 </span><br><span class="hljs-comment">//然后再为i变量后置自增一次 */</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>;i++) &#123;<br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;123&#x27;</span>)<br><br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             

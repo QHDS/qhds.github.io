@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.dcaoao.com/image/202210282111277.webp">
 <meta property="article:published_time" content="2022-10-27T02:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-03T02:09:19.600Z">
+<meta property="article:modified_time" content="2022-11-08T13:25:06.693Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9.1k 字
+          11k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          76 分钟
+          92 分钟
         
       </span>
     
@@ -483,6 +483,46 @@ switch 表达式的值与 case 的值为全等的关系 === 也就是说数据�
  4. 执行过 <code>循环体</code> 后，再去执行一次 <code>操作表达式</code> <br>
  5. 一套循环已经完成，接下来继续检查 <code>条件表达式</code> 是否满足条件，满足条件则继续循环</p>
 <figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//解析 执行i等于1 然后检查i是否小于等于100</span><br><span class="hljs-comment">//如果小于100 执行一次控制台输出123 </span><br><span class="hljs-comment">//然后再为i变量后置自增一次 */</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>;i++) &#123;<br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;123&#x27;</span>)<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="for循环案例"><a class="markdownIt-Anchor" href="#for循环案例">#</a> for 循环案例</h3>
+<p>做一个学生成绩查询的案例，需要最后输出班级人数，班级总分数，班级平均分</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//首先要求用户输入班级总人数</span><br><span class="hljs-keyword">var</span> total = prompt (<span class="hljs-string">&#x27;请输入班级总人数&#x27;</span>)<br><span class="hljs-comment">//然后使用for循环弹出相应的输入框要求输出每个人的成绩</span><br><span class="hljs-comment">//然后声明一个总成绩空值</span><br><span class="hljs-keyword">var</span> totalresults = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;i &lt;= total ;i++) &#123;<br>    <span class="hljs-keyword">var</span> results = prompt (<span class="hljs-string">&#x27;请输入第&#x27;</span> + i +<span class="hljs-string">&#x27;个学生的成绩&#x27;</span>)<br>    <span class="hljs-comment">//然后总成绩将每次循环的成绩相加保存,但是prompt输入过来的字符是字符串格式,还需要转换为数值</span><br>    totalresults += <span class="hljs-built_in">Number</span>(results)<br>&#125; <br><br><span class="hljs-comment">// 然后输出平均分,总成绩,班级人数</span><br>alert(<span class="hljs-string">&#x27;班级的总人数是&#x27;</span> + total + <span class="hljs-string">&#x27;人&#x27;</span>)<br>alert(<span class="hljs-string">&#x27;班级的总成绩是&#x27;</span> + totalresults + <span class="hljs-string">&#x27;分&#x27;</span>)<br>alert(<span class="hljs-string">&#x27;班级的平均分是&#x27;</span> + totalresults / total + <span class="hljs-string">&#x27;分&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>效果图<br>
+<img src="https://image.dcaoao.com/image/202211082124607.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="1107记录"><a class="markdownIt-Anchor" href="#1107记录">#</a> 11.07 记录</h2>
+<h2 id="for循环执行不同的代码"><a class="markdownIt-Anchor" href="#for循环执行不同的代码">#</a> for 循环执行不同的代码</h2>
+<p>for 循环可以使用 if else 来执行不同的代码，输出不同的值</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span> ; i &lt;= <span class="hljs-number">100</span> ; i++) &#123;<br>    <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;这是第1圈循环&#x27;</span>)<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i == <span class="hljs-number">100</span>) &#123;<br>        <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;这是第100圈循环&#x27;</span>)<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;循环次数&#x27;</span> + i)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="双重for循环"><a class="markdownIt-Anchor" href="#双重for循环">#</a> 双重 for 循环</h2>
+<p>for 循环可以嵌套，外层循环一次，内层循环全部</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span> ; i &lt;= <span class="hljs-number">10</span> ;i++) &#123; <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">1</span> ;k &lt;= <span class="hljs-number">10</span> ; k++) ( <br>        <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&#x27;内层的输出&#x27;</span>)<br>    )<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>结果就是，内层循环先在控制台输出十遍 <code>内层的输出</code> ，然后再回到外循环，然后再输出十遍 <code>内层的输出</code> ，往返 10 次，直到外层循环完成</p>
+<h3 id="双重for循环案例"><a class="markdownIt-Anchor" href="#双重for循环案例">#</a> 双重 for 循环案例</h3>
+<h4 id="案例输出五行五列的星星符号"><a class="markdownIt-Anchor" href="#案例输出五行五列的星星符号">#</a> 案例，输出五行五列的星星符号</h4>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//首先定义一个空值</span><br><span class="hljs-keyword">var</span> xing = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-comment">//外循环</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>;i &lt;= <span class="hljs-number">5</span> ;i++) &#123;<br>    <span class="hljs-comment">//内循环</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">1</span>;k &lt;= <span class="hljs-number">5</span> ; k++ ) &#123;<br>        xing += <span class="hljs-string">&#x27;☆&#x27;</span><br>    &#125;<br>    xing += <span class="hljs-string">&#x27;\n&#x27;</span><br>&#125;<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(xing)<br><br></code></pre></td></tr></table></figure>
+<p>解读：首先看内循环，内循环因为 for 双重循环的特性，外循环执行一次，内循环就要执行五次<br>
+现在内循环给出的是一颗 <code>☆</code> , 循环五次过后变为  <code>☆☆☆☆☆</code>  也就是一行<br>
+那继续执行下去，外循环执行五次后，得到了 25 颗星星，但是效果不对<br>
+<img src="https://image.dcaoao.com/image/202211082041137.webp" srcset="/img/loading.gif" lazyload alt=""><br>
+要求的是五行五列，但是现在为一列，说明缺少换行符号<br>
+那就在内循环出五颗星星后，在其后方添加一个换行符<br>
+ <code>xing = xing + '\n'</code> <br>
+ <code>xing += '\n'</code> <br>
+ 两者皆可，最后在循环外输出结果，得到想要的答案<br>
+<img src="https://image.dcaoao.com/image/202211082044473.webp" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="案例输出倒三角的星星图案"><a class="markdownIt-Anchor" href="#案例输出倒三角的星星图案">#</a> 案例，输出倒三角的星星图案</h4>
+<p>首先是示例图<br>
+<img src="https://image.dcaoao.com/image/202211082046226.webp" srcset="/img/loading.gif" lazyload alt=""><br>
+第一层十颗星星，第二层九颗星星，以此类推</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-comment">//声明空值,方便调用</span><br><span class="hljs-keyword">var</span> xing = <span class="hljs-string">&#x27;&#x27;</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span> ;i &lt;= <span class="hljs-number">10</span> ;i++) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = i ;k &lt;= <span class="hljs-number">10</span>; k++) &#123;<br>                    xing += <span class="hljs-string">&#x27;☆&#x27;</span><br>                &#125;<br>                xing += <span class="hljs-string">&#x27;\n&#x27;</span><br>            &#125;<br>            <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span> (xing)<br></code></pre></td></tr></table></figure>
+<p>解读：第一层需要十颗星，那就叫内层循环首次循环直接输出一排十颗的星星，所以 <code>k &lt;= 10</code> <br>
+ 内层循环的 <code>k</code>  值是取外层循环的 <code>i</code>  值，也就是说，外层第一次循环，内层会循环十遍，也就输出一排 10 颗星，在内循环其后面添加一句 <code>xing += '\n'</code>  达到每次内循环完成后换行的目的</p>
+<p>外层第二次循环后，i 值变为了 2, 那内循环的 <code>k</code>  值是取的 <code>i</code> , 则内循环这次会循环九次，输出九颗 <code>☆</code> , 再次换行，以此类推</p>
+<p>至于正三角的话更简单，首次内循环只可循环一次，然后按照循环次数增加<br>
+将内循环更改为</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">1</span> ;k &lt;= i; k++) &#123;<br>    xing += <span class="hljs-string">&#x27;☆&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这样内循环首次循环时，一次便会停止，外循环第二次循环后，内循环便会循环两次，以此类推<br>
+<img src="https://image.dcaoao.com/image/202211082108719.webp" srcset="/img/loading.gif" lazyload alt=""></p>
+
                 
               </div>
             

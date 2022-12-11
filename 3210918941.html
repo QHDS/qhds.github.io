@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="稻草">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="# AJAX 的优点: 可以无需刷新页面与服务端进行通信 允许根据用户事件来更新部分页面内容  # AJAX 的缺点: 没有浏览历史,无法回退 存在跨域问题 (a.com向b.com发送请求 不被允许) 可以解决 对SEO不友好  # http 超文本传输协议 规定了浏览器与万维网服务器之间的通信规则 # 请求报文: 分为 请求行  GET &#x2F;video&#x2F;BV1WC4y1b78y?p&#x3D;5&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AJAX学习记录">
+<meta property="og:url" content="http://dcaoao.com/3210918941.html">
+<meta property="og:site_name" content="Straw&#39; Blog">
+<meta property="og:description" content="# AJAX 的优点: 可以无需刷新页面与服务端进行通信 允许根据用户事件来更新部分页面内容  # AJAX 的缺点: 没有浏览历史,无法回退 存在跨域问题 (a.com向b.com发送请求 不被允许) 可以解决 对SEO不友好  # http 超文本传输协议 规定了浏览器与万维网服务器之间的通信规则 # 请求报文: 分为 请求行  GET &#x2F;video&#x2F;BV1WC4y1b78y?p&#x3D;5&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg">
+<meta property="article:published_time" content="2022-12-11T12:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-11T13:16:42.134Z">
+<meta property="article:author" content="稻草">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imgse.com/content/images/system/home_cover_1601010270144_8921bc.jpg">
+  
+  
+  
+  <title>AJAX学习记录 - Straw&#39; Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/bootstrap.btn.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dcaoao.com","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"G-9TE5D5J950","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-9TE5D5J950', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Straw&#39; Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AJAX学习记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-12-11 20:00" pubdate>
+          2022年12月11日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AJAX学习记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="ajax的优点"><a class="markdownIt-Anchor" href="#ajax的优点">#</a> AJAX 的优点:</h1>
+<pre><code class="hljs">可以无需刷新页面与服务端进行通信
+允许根据用户事件来更新部分页面内容
+</code></pre>
+<h1 id="ajax的缺点"><a class="markdownIt-Anchor" href="#ajax的缺点">#</a> AJAX 的缺点:</h1>
+<pre><code class="hljs">没有浏览历史,无法回退
+存在跨域问题 (a.com向b.com发送请求 不被允许) 可以解决
+对SEO不友好
+</code></pre>
+<h1 id="http-超文本传输协议"><a class="markdownIt-Anchor" href="#http-超文本传输协议">#</a> http 超文本传输协议</h1>
+<p>规定了浏览器与万维网服务器之间的通信规则</p>
+<h2 id="请求报文"><a class="markdownIt-Anchor" href="#请求报文">#</a> 请求报文:</h2>
+<p>分为<br>
+请求行  <code>GET /video/BV1WC4y1b78y?p=5&amp; HTTP/1.1</code> <br>
+ 请求头</p>
+ <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-meta">:authority:</span> api.vc.bilibili.com<br><span class="hljs-code">            :method: GET</span><br><span class="hljs-code">            :path: /dynamic_svr/v1/dynamic_svr/web_homepage?alltype_offset=0&amp;video_offset=738044689246060700&amp;article_offset=0</span><br><span class="hljs-code">            :scheme: https </span><br></code></pre></td></tr></table></figure>
+<p>空行<br>
+请求体</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">如果是GET请求,请求体为空 ,如果是POST请求,请求体可以不为空   <span class="hljs-attribute">spm_id_from</span>=pageDriver&amp;vd_source=00960caa5adc68e8bc3f39732ee0e72d<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212102331156.png" srcset="/img/loading.gif" lazyload alt=""><br>
+<img src="https://image.dcaoao.com/image/202212102333845.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="响应报文"><a class="markdownIt-Anchor" href="#响应报文">#</a> 响应报文</h2>
+<p>响应行:<br>
+HTTP/1.1   200 ok     //200 是响应状态码 同理还有 404  403 401 500 200   ok 与响应状态码同步<br>
+响应头:<br>
+content-type: application/json<br>
+cross-origin-resource-policy: cross-origin    等，与请求头一致<br>
+空行</p>
+<p>响应体 :  HTML 结构  服务端返回的结果等<br>
+ <code> </code> <br>
+<img src="https://image.dcaoao.com/image/202212102332671.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="ajax发送get请求"><a class="markdownIt-Anchor" href="#ajax发送get请求">#</a> AJAX 发送 GET 请求</h1>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk">btnget.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>,<span class="hljs-keyword">function</span>()&#123;<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">1</span>.创建对象<br>    var xhr = new XMLHttpRequest()<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">2</span>.初始化 设置请求方法和URL<br>    xhr.open(<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;http://127.0.0.1:3000/server?a=100&amp;b=200&#x27;</span>)<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">3</span>.发送<br>    xhr.send()<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">4</span>.事件绑定<br>    <span class="hljs-regexp">//</span> on when  当...的时候<br>    <span class="hljs-regexp">//</span> readyState   是xhr中的属性 表示状态 <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span>     <span class="hljs-number">4</span>代表服务器完全响应  <span class="hljs-number">3</span>代表部分响应<br>    <span class="hljs-regexp">//</span> change 发生了改变<br><br>    xhr.onreadystatechange = <span class="hljs-keyword">function</span>() &#123;<br>        <span class="hljs-keyword">if</span>(xhr.readyState === <span class="hljs-number">4</span>) &#123;  <span class="hljs-regexp">//</span>当服务器完全响应<br>            <span class="hljs-keyword">if</span>(xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.status &lt; <span class="hljs-number">300</span>) &#123;   <span class="hljs-regexp">//</span>判断响应码 介于<span class="hljs-number">200</span>-<span class="hljs-number">300</span>之间的都是正常返回<br>                divget.innerHTML = xhr.response  <span class="hljs-regexp">//</span>修改标签内容<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112103726.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(xhr.status)     <span class="hljs-comment">//返回状态码</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(xhr.statusText) <span class="hljs-comment">//返回状态字符串</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(xhr.getAllResponseHeaders())      <span class="hljs-comment">//返回所有响应头</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(xhr.response)   <span class="hljs-comment">//返回响应体</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112057483.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="ajax-发起post请求"><a class="markdownIt-Anchor" href="#ajax-发起post请求">#</a> AJAX 发起 POST 请求</h1>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>设置点击事件<br>  bthpost.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>,<span class="hljs-keyword">function</span>()&#123;<br>      <span class="hljs-regexp">//</span><span class="hljs-number">1</span>.创建对象<br>      var xhr = new XMLHttpRequest()<br>      <span class="hljs-regexp">//</span> <span class="hljs-number">1.1</span> 设置响应体数据的类型为json<br>      xhr.responseType = <span class="hljs-string">&#x27;json&#x27;</span><br>      <span class="hljs-regexp">//</span> <span class="hljs-number">2</span>.初始化<br>      xhr.open(<span class="hljs-string">&#x27;POST&#x27;</span>,<span class="hljs-string">&#x27;http://127.0.0.1:3000/json&#x27;</span>)<br><br>      <span class="hljs-regexp">//</span> <span class="hljs-number">2.2</span> 设置请求头 xhr.setRequestHeader(<span class="hljs-string">&#x27;请求头&#x27;</span>，<span class="hljs-string">&#x27;请求头内容&#x27;</span>)<br>      xhr.setRequestHeader(<span class="hljs-string">&#x27;Content-Type&#x27;</span>,<span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>)<br>      <span class="hljs-regexp">//</span> <span class="hljs-number">3</span>.发送,设置POST的请求体<br>      xhr.send(<span class="hljs-string">&#x27;a=100&amp;b=200&#x27;</span>)<br>      <span class="hljs-regexp">//</span> <span class="hljs-number">4</span>.事件绑定<br>      xhr.onreadystatechange = <span class="hljs-keyword">function</span>() &#123;<br>          <span class="hljs-keyword">if</span>(xhr.readyState === <span class="hljs-number">4</span>) &#123;<br>              <span class="hljs-keyword">if</span> (xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.status &lt;<span class="hljs-number">300</span>) &#123;<br><br>                  /* <br>                  <span class="hljs-regexp">//</span>手动将服务器发送过来的字符串转换为JSON格式<br>                  let data = JSON.parse(xhr.response)<br>                  console.log(data)<br>                  div.innerHTML = data.age<br>                   */<br><br>                   console.log(xhr.response)<br>                  div.innerHTML = xhr.response.name<br>              &#125;<br>          &#125;<br>      &#125;<br>  &#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112102611.png" srcset="/img/loading.gif" lazyload alt=""><img src="https://image.dcaoao.com/image/202212112102294.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>其中，如果服务端发送过来的是字符串形式的数据，需要将其转换为 JSON 格式</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs haskell">//手动将服务器发送过来的字符串转换为<span class="hljs-type">JSON</span>格式<br><span class="hljs-title">let</span> <span class="hljs-class"><span class="hljs-keyword">data</span> = <span class="hljs-type">JSON</span>.parse(<span class="hljs-title">xhr</span>.<span class="hljs-title">response</span>)</span><br></code></pre></td></tr></table></figure>
+<p>当然，也有自动的方法，可以将数据自动转换为 JSON 格式</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">xhr.responseType</span> = <span class="hljs-string">&#x27;json&#x27;</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112102460.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>设置请求头  <code>xhr.setRequestHeader('请求头'，'请求头内容')</code></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">xhr.set<span class="hljs-constructor">RequestHeader(&#x27;Content-Type&#x27;,&#x27;<span class="hljs-params">application</span><span class="hljs-operator">/</span><span class="hljs-params">x</span>-<span class="hljs-params">www</span>-<span class="hljs-params">form</span>-<span class="hljs-params">urlencoded</span>&#x27;)</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112101762.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="解决ie缓存问题"><a class="markdownIt-Anchor" href="#解决ie缓存问题">#</a> 解决 IE 缓存问题</h1>
+<p>IE 浏览器的 AJAX 请求，容易被缓存，使页面无法获取到服务器返回的最新数据<br>
+解决方法为使请求链接不停变化，使浏览器认为这是一个新的链接请求，则就不会缓存数据<br>
+每一次都是不同的链接，跟随时间戳</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">xhr.open(<span class="hljs-string">&#x27;POST&#x27;</span>,<span class="hljs-string">&#x27;http://127.0.0.1:3000/ie?t=&#x27;</span> + <span class="hljs-built_in">Date</span>.<span class="hljs-built_in">now</span>())     <span class="hljs-comment">//核心点 在请求后面加上时间戳 这样每次都是不同的时间来进行请求，IE也不会缓存</span><br><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112108554.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="延时响应"><a class="markdownIt-Anchor" href="#延时响应">#</a> 延时响应</h1>
+<p>使请求设置超时响应与断网响应，如果超出预订的时间，则按照事先写好的提示进行操作，这里服务端设置了 3 秒后进行响应</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>设置点击事件<br>bthpost.addEventListener(<span class="hljs-string">&#x27;click&#x27;</span>,<span class="hljs-keyword">function</span>()&#123;<br>    <span class="hljs-regexp">//</span><span class="hljs-number">1</span>.创建对象<br>    var xhr = new XMLHttpRequest()<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">2</span>.初始化<br>    xhr.open(<span class="hljs-string">&#x27;POST&#x27;</span>,<span class="hljs-string">&#x27;http://127.0.0.1:3000/yanshi&#x27;</span>)     <br><br>    <span class="hljs-regexp">//</span> <span class="hljs-number">2.2</span> 设置请求头<br>    xhr.setRequestHeader(<span class="hljs-string">&#x27;Content-Type&#x27;</span>,<span class="hljs-string">&#x27;application/x-www-form-urlencoded&#x27;</span>)<br>    <span class="hljs-regexp">//</span> <span class="hljs-number">3</span>.发送,设置POST的请求体<br>    xhr.send(<span class="hljs-string">&#x27;a=100&amp;b=200&#x27;</span>)<br><br><br>    <span class="hljs-regexp">//</span> 设置超时后的响应<br>    xhr.timeout = <span class="hljs-number">2000</span>  <span class="hljs-regexp">//</span>设定事件<span class="hljs-number">2</span>S<br>    xhr.ontimeout = <span class="hljs-keyword">function</span>()&#123;   <span class="hljs-regexp">//</span>超时后执行的函数<br>        alert(<span class="hljs-string">&#x27;链接超时&#x27;</span>)<br>    &#125;<br>    <span class="hljs-regexp">//</span>关于网络异常的回调函数<br>    xhr.onerror = <span class="hljs-keyword">function</span>() &#123;<br>        alert(<span class="hljs-string">&#x27;网络链接失败&#x27;</span>)<br>    &#125;<br><br>    <span class="hljs-regexp">//</span> <span class="hljs-number">4</span>.事件绑定<br>    xhr.onreadystatechange = <span class="hljs-keyword">function</span>() &#123;<br>        <span class="hljs-keyword">if</span>(xhr.readyState === <span class="hljs-number">4</span>) &#123;<br>            <span class="hljs-keyword">if</span> (xhr.status &gt;= <span class="hljs-number">200</span> &amp;&amp; xhr.status &lt;<span class="hljs-number">300</span>) &#123;<br>                 console.log(xhr.response)<br>                div.innerHTML = xhr.response<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112112176.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="取消请求"><a class="markdownIt-Anchor" href="#取消请求">#</a> 取消请求</h1>
+<p><code>abort()</code>  用于取消 AJAX 的请求</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-comment">// 发送请求按钮</span><br> btns<span class="hljs-selector-attr">[0]</span><span class="hljs-selector-class">.onclick</span> = <span class="hljs-built_in">function</span>() &#123;<br>     x = new <span class="hljs-built_in">XMLHttpRequest</span>()<br>     x<span class="hljs-selector-class">.open</span>(<span class="hljs-string">&#x27;GET&#x27;</span>,<span class="hljs-string">&#x27;http://127.0.0.1:3000/quxiao&#x27;</span>)<br>     x<span class="hljs-selector-class">.send</span>()<br> &#125;<br><br> <span class="hljs-comment">// 取消发送按钮</span><br> btns<span class="hljs-selector-attr">[1]</span><span class="hljs-selector-class">.addEventListener</span>(<span class="hljs-string">&#x27;click&#x27;</span>,<span class="hljs-built_in">function</span>()&#123;<br>     x<span class="hljs-selector-class">.abort</span>()<br> &#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212112116001.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="取消请求扩展-重复请求"><a class="markdownIt-Anchor" href="#取消请求扩展-重复请求">#</a> 取消请求扩展 重复请求</h2>
+<p>如果用户多次重复请求，则会造成服务器压力过大<br>
+核心思想：单独标识一个变量，如果其状态为未发送状态，则提交发送请求，变更状态为发送中<br>
+如果再次请求发送，检测其状态，如果是发送中，则取消上一次的请求，新提交一个请求<br>
+请求结果返回后，将其状态变更为未发送</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> btns = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;button&#x27;</span>)<br><span class="hljs-keyword">let</span> x = <span class="hljs-literal">null</span><br><span class="hljs-comment">// 标识变量</span><br><span class="hljs-keyword">let</span> onlist = <span class="hljs-literal">false</span>  <span class="hljs-comment">//是否正在发送AJAX请求</span><br><br><span class="hljs-comment">// 发送请求按钮</span><br>btns[<span class="hljs-number">0</span>].<span class="hljs-property">onclick</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">if</span>(onlist) &#123;x.<span class="hljs-title function_">abort</span>()&#125;<br>    x = <span class="hljs-keyword">new</span> <span class="hljs-title class_">XMLHttpRequest</span>()<br>    onlist = <span class="hljs-literal">true</span>;  <span class="hljs-comment">//修改标识变量为发送中</span><br>    x.<span class="hljs-title function_">open</span>(<span class="hljs-string">&#x27;GET&#x27;</span>, <span class="hljs-string">&#x27;http://127.0.0.1:3000/quxiao&#x27;</span>);<br>    x.<span class="hljs-title function_">send</span>();<br>    x.<span class="hljs-property">onreadystatechange</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">if</span> (x.<span class="hljs-property">readyState</span> === <span class="hljs-number">4</span>) &#123;<br>            onlist = <span class="hljs-literal">false</span><br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(onlist)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0/">#学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AJAX学习记录</div>
+      <div>http://dcaoao.com/3210918941.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>稻草</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年12月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/717525190.html" title="随身WIFI刷机记录">
+                        <span class="hidden-mobile">随身WIFI刷机记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"zreo09/zreo09.github.io","repo-id":"R_kgDOIUWNMQ","category":"Announcements","category-id":"DIC_kwDOIUWNMc4CSOGR","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

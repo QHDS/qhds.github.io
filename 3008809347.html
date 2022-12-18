@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.dcaoao.com/image/202212161929505.png">
 <meta property="article:published_time" content="2022-12-15T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-17T13:26:43.844Z">
+<meta property="article:modified_time" content="2022-12-18T15:10:06.508Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.3k 字
+          7.9k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          53 分钟
+          66 分钟
         
       </span>
     
@@ -408,6 +408,37 @@ super () 需要在任何 this 的最前面调用，确保参数传递至父类</
 <p><img src="https://image.dcaoao.com/image/202212172121053.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="利用call使子类继承父类的属性"><a class="markdownIt-Anchor" href="#利用call使子类继承父类的属性">#</a> 利用 call, 使子类继承父类的属性</h3>
 <figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs qml"><span class="hljs-comment">// 创建父类</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Father</span> (<span class="hljs-params">uname,age</span>) </span>&#123;<br>    <span class="hljs-keyword">this</span>.uname = uname<br>    <span class="hljs-keyword">this</span>.age = age<br>&#125;<br><br><br><span class="hljs-comment">// 创建子类</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Son</span> (<span class="hljs-params">uname,age,sex</span>) </span>&#123;<br>    <span class="hljs-comment">// 利用call,使父类的this,指向子类</span><br>    Father.call(<span class="hljs-keyword">this</span>,uname,age)<br>    <span class="hljs-keyword">this</span>.sex = sex<br>&#125;<br><span class="hljs-keyword">var</span> son = <span class="hljs-keyword">new</span> Son(<span class="hljs-string">&#x27;名字&#x27;</span>,<span class="hljs-string">&#x27;年龄18&#x27;</span>,<span class="hljs-string">&#x27;男&#x27;</span>)<br><span class="hljs-built_in">console</span>.log(son)   <span class="hljs-comment">// Son &#123;uname: &#x27;名字&#x27;, age: &#x27;年龄18&#x27;, sex: &#x27;男&#x27;&#125;   不仅拥有父类的uname和age，也有自己的sex属性</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212172127740.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="数组方法"><a class="markdownIt-Anchor" href="#数组方法">#</a> 数组方法</h1>
+<h2 id="foreach"><a class="markdownIt-Anchor" href="#foreach">#</a> forEach</h2>
+<p><code>forEach</code>  可以迭代 / 遍历数组 与 for 循环相比更加简洁</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">var arr = [<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>,<span class="hljs-string">&#x27;c&#x27;</span>,<span class="hljs-string">&#x27;d&#x27;</span>]    // 创建一个数组<br><br>arr.<span class="hljs-keyword">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-keyword">value</span>,<span class="hljs-keyword">index</span>,<span class="hljs-keyword">array</span>)&#123;<br>    console.log(<span class="hljs-string">&#x27;数组的单独内容&#x27;</span> + <span class="hljs-keyword">value</span>)<br>&#125;)<br><br>arr.<span class="hljs-keyword">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-keyword">value</span>,<span class="hljs-keyword">index</span>,<span class="hljs-keyword">array</span>)&#123;<br>    console.log(<span class="hljs-string">&#x27;数组的索引号&#x27;</span> + <span class="hljs-keyword">index</span>)<br>&#125;)<br><br>arr.<span class="hljs-keyword">forEach</span>(<span class="hljs-keyword">function</span>(<span class="hljs-keyword">value</span>,<span class="hljs-keyword">index</span>,<span class="hljs-keyword">array</span>)&#123;<br>    console.log(<span class="hljs-string">&#x27;数组的所有内容&#x27;</span> + <span class="hljs-keyword">array</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212182302733.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="filter"><a class="markdownIt-Anchor" href="#filter">#</a> filter</h2>
+<p><code>filter</code>  可以遍历 / 筛选数组  将符合条件的数组值取出，重新整合为一个新的数组<br>
+如果在数组中查询一个唯一的元素， <code>filter</code>  比较合适</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> abb = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">55</span>,<span class="hljs-number">66</span>,<span class="hljs-number">99</span>,<span class="hljs-number">65</span>,<span class="hljs-number">32</span>,<span class="hljs-number">68</span>,<span class="hljs-number">75</span>]<br><span class="hljs-keyword">var</span> filterAbb = abb.<span class="hljs-built_in">filter</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">value,index</span>)&#123;<br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(value)   <span class="hljs-comment">// 数组值</span><br>    <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(index)   <span class="hljs-comment">// 索引号</span><br>    <span class="hljs-keyword">return</span> value &gt; <span class="hljs-number">20</span>    <span class="hljs-comment">// 筛选出符合条件的数据，整合为新数组  此处筛选出大于20的数值</span><br>&#125;)<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(filterAbb)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212182303788.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="some"><a class="markdownIt-Anchor" href="#some">#</a> some</h2>
+<p><code>some</code>  查找数组中是否有满足条件的元素 返回 <code>布尔值</code>   查找到第一个满足条件的元素时，则直接停止循环</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> acc = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">55</span>,<span class="hljs-number">66</span>,<span class="hljs-number">99</span>,<span class="hljs-number">65</span>,<span class="hljs-number">32</span>,<span class="hljs-number">68</span>,<span class="hljs-number">75</span>]<br><br><span class="hljs-keyword">var</span> accSome = acc.some(<span class="hljs-keyword">function</span>(<span class="hljs-params">value,index</span>)&#123;<br>    <span class="hljs-keyword">return</span> value &gt; <span class="hljs-number">50</span>   <span class="hljs-comment">// 查找是否有大于50的数值</span><br>&#125;)<br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(accSome)   <span class="hljs-comment">//true</span><br></code></pre></td></tr></table></figure>
+<p>剩下的还有  <code>map()</code>     <code>every()</code>   也可以做到循环数组，不同的作用<br>
+在  <code>forEach</code>   <code>some</code>   <code>filter</code>  中，如果碰到  <code>return true</code>    <code>forEach与filter</code>  不会停止迭代， <code>some</code>  会停止迭代</p>
+<h2 id="trim去除左右两侧空格"><a class="markdownIt-Anchor" href="#trim去除左右两侧空格">#</a> trim, 去除左右两侧空格</h2>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">var</span> a = <span class="hljs-string">&#x27;          字符串         &#x27;</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(a)<br><span class="hljs-comment">// 去除左右空格</span><br><span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(a.<span class="hljs-built_in">trim</span>())<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212182305060.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h1 id="修改或者添加对象值"><a class="markdownIt-Anchor" href="#修改或者添加对象值">#</a> 修改或者添加对象值</h1>
+<p>新方法，使用 <code>Object.defineProperty(obj,'prop',descriptor)</code> <br>
+ <code>obj</code> : 必须 目标对象<br>
+ <code>prop</code>  必须 需要定义或者要修改的属性的名字<br>
+ <code>descriptor</code> : 必须 目标属性所拥有的特性，以对象的形式进行书写 拥有四个值<br>
+ <code>value</code> : 设置属性的值，默认为空<br>
+ <code>writable</code> : 设置值是否可以重写  <code>true|false</code>   默认 false<br>
+ <code>enumerable</code> : 目标属性是否可以被枚举    <code>true|false</code>   默认 false<br>
+ <code>configurable</code> : 目标属性是否可以被删除，或者可以再次修改特性   <code>true|false</code>   默认 false */</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-selector-tag">var</span> <span class="hljs-selector-tag">a</span> = &#123;<br>    name:<span class="hljs-string">&#x27;名字&#x27;</span>,<br>    age:<span class="hljs-number">18</span>,<br>    sex:<span class="hljs-string">&#x27;男&#x27;</span><br>&#125;<br><br>console<span class="hljs-selector-class">.log</span>(a)<br><br>Object<span class="hljs-selector-class">.defineProperty</span>(<span class="hljs-selector-tag">a</span>,<span class="hljs-string">&#x27;name&#x27;</span>,&#123;<br>    <span class="hljs-comment">// 通过value设置属性值</span><br>    value:<span class="hljs-string">&#x27;这是个名字&#x27;</span>,<br>    <span class="hljs-comment">// writable设定其不可被修改</span><br>    writable:false,<br>&#125;)<br><br><span class="hljs-selector-tag">a</span><span class="hljs-selector-class">.name</span> = <span class="hljs-string">&#x27;名字啊&#x27;</span>   <span class="hljs-comment">// 其下方修改过后还是原来的值，不可被修改</span><br>console<span class="hljs-selector-class">.log</span>(a)<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202212182310817.png" srcset="/img/loading.gif" lazyload alt=""></p>
+
                 
               </div>
             

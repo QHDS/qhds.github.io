@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.dcaoao.com/image/202212292231924.png">
 <meta property="article:published_time" content="2022-12-29T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-09T13:46:50.896Z">
+<meta property="article:modified_time" content="2023-01-12T11:54:33.248Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          47k 字
+          51k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          388 分钟
+          429 分钟
         
       </span>
     
@@ -873,7 +873,99 @@ v-if : 条件渲染 (动态控制节点是否存在)<br>
  在 <code>style</code>  标签内加入  <code>scoped</code>  属性，可以是样式只在当前组件生效，防止冲突<br>
  <code>lang=&quot;less&quot;</code>  使 style 标签内使用 less 语法，需要完善环境  <code>npm i less-loader@7</code>  安装 <code>less-loader</code> <br>
  <code>&lt;style lang=&quot;less&quot;&gt;</code></p>
-
+<h1 id="本地存储"><a class="markdownIt-Anchor" href="#本地存储">#</a> 本地存储</h1>
+<p>本地存储，按照域名区分，由浏览器负责保存，大小限制 5MB 左右，不同浏览器不一样<br>
+其内部，只能存储字符串，使用键值对方法存储数据，如果需要存储对象形式数据，需要在存入时将其转换为字符串格式，取用时将其转换为对象形式即可<br>
+<img src="https://image.dcaoao.com/image/202301121918746.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="本地存储-localstorage"><a class="markdownIt-Anchor" href="#本地存储-localstorage">#</a> 本地存储 localStorage</h2>
+<p>特性，关闭浏览器后不会消失，需要手动清除</p>
+<p>添加数据: <code>localStorage.setItem('键值名', '添加的值')</code> <br>
+ 读取数据: <code>localStorage.getItem(&quot;键值名&quot;)</code> <br>
+ 删除数据: <code>localStorage.removeItem(&quot;键值名&quot;)</code> <br>
+ 清空数据: <code>localStorage.clear()</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>本地存储 localStorage 特性,关闭浏览器后不会消失,需要手动清除<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;saveData()&quot;</span>&gt;</span>添加数据<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;readData()&quot;</span>&gt;</span>读取数据<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;delData()&quot;</span>&gt;</span>删除数据<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;clearData()&quot;</span>&gt;</span>清空数据<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"></span><br><span class="language-javascript">        <span class="hljs-keyword">const</span> p = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;名字&quot;</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">18</span> &#125;</span><br><span class="language-javascript">        <span class="hljs-comment">// 添加一个数据</span></span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">saveData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;msg&#x27;</span>, <span class="hljs-string">&#x27;你好,世界&#x27;</span>)</span><br><span class="language-javascript">            <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-string">&#x27;json&#x27;</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(p))  <span class="hljs-comment">// JSON.stringify(p) 将对象转换为字符串类型</span></span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-comment">// 读取一个数据</span></span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">readData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&quot;msg&quot;</span>))</span><br><span class="language-javascript">            <span class="hljs-keyword">const</span> <span class="hljs-title class_">JSON</span>Test = <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-string">&#x27;json&#x27;</span>)</span><br><span class="language-javascript">            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title class_">JSON</span>Test))  <span class="hljs-comment">// JSON.parse(JSONTest) 将字符串转换为JSON格式</span></span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-comment">// 删除一个数据</span></span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">delData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">removeItem</span>(<span class="hljs-string">&quot;msg&quot;</span>)</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">        <span class="hljs-comment">// 清空数据</span></span><br><span class="language-javascript">        <span class="hljs-keyword">function</span> <span class="hljs-title function_">clearData</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">            <span class="hljs-variable language_">localStorage</span>.<span class="hljs-title function_">clear</span>()</span><br><span class="language-javascript">        &#125;</span><br><span class="language-javascript">    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202301121922577.gif" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="本地存储-sessionstorage"><a class="markdownIt-Anchor" href="#本地存储-sessionstorage">#</a> 本地存储 sessionStorage</h2>
+<p>特性，关闭浏览器数据清空<br>
+其他使用方式与 localStorage 完全相同</p>
+<p>添加数据: <code>sessionStorage.setItem('键值名', '添加的值')</code> <br>
+ 读取数据: <code>sessionStorage.getItem(&quot;键值名&quot;)</code> <br>
+ 删除数据: <code>sessionStorage.removeItem(&quot;键值名&quot;)</code> <br>
+ 清空数据: <code>sessionStorage.clear()</code></p>
+<h1 id="自定义事件"><a class="markdownIt-Anchor" href="#自定义事件">#</a> 自定义事件</h1>
+<p>自定义事件与原生事件类似相同，但是执行的方式由程序员定义<br>
+组件的自定义事件</p>
+<h3 id="一一种组件之间通信的方式-适用于子组件给父组件传递信息"><a class="markdownIt-Anchor" href="#一一种组件之间通信的方式-适用于子组件给父组件传递信息">#</a> 一。一种组件之间通信的方式 适用于子组件给父组件传递信息</h3>
+<h3 id="二-使用场景-a是父组件-b是子组件-b想给a传递数据-那么就要在a中给b绑定自定义事件事件的回调函数写在父组件中"><a class="markdownIt-Anchor" href="#二-使用场景-a是父组件-b是子组件-b想给a传递数据-那么就要在a中给b绑定自定义事件事件的回调函数写在父组件中">#</a> 二。使用场景 A 是父组件 B 是子组件 B 想给 A 传递数据 那么就要在 A 中给 B 绑定自定义事件 (事件的回调函数写在父组件中)</h3>
+<h3 id="三-绑定自定义事件"><a class="markdownIt-Anchor" href="#三-绑定自定义事件">#</a> 三。绑定自定义事件</h3>
+<p>1. 第一种方式 在父组件中:  <code>&lt;Demo @shijian=&quot;test&quot; /&gt; 或者 &lt;Demo v-on:shijian=&quot;test&quot; /&gt;</code> <br>
+2. 第二种方式 在父组件中:  <code>&lt;Demo ref=&quot;demoTest&quot;&gt;</code>    <code>mounted() &#123;this.$refs.demoTest.$on(&quot;refDemo&quot;,this.test)&#125;,</code> <br>
+ 这里的 <code>this.test</code>  指的是父组件中的回调函数 写在 <code>methods</code>  中   <code>refDemo</code>  则需要在子组件中使用  <code>this.$emit(&quot;refDemo&quot;, this.name);</code>  接收</p>
+<p>3. 如果只想让自定义事件触发一次，可以使用 once 修饰符，或者 $once 方法</p>
+<p>四。触发自定义事件  <code>this.$emit(&quot;refDemo&quot;, 传递的数据);</code> <br>
+ 五。解绑自定义事件  <code>this.$off('refDemo')</code>  , 解绑多个自定义事件  <code>this.$off(['refDemo1','refDemo2'])</code> <br>
+ 六。组件是可以绑定原生 DOM 事件 如果和自定义事件一起使用 需要在绑定的子标签上加上 <code>native</code>   例:  <code>&lt;Student v-on:testDemo=&quot;demo&quot; @click.native=&quot;dianji&quot;/&gt;</code> <br>
+ 七。通过  <code>this.$refs.demoTest.$on(&quot;refDemo&quot;,回调函数名)</code>  绑定自定义事件时 回调函数要么配置值 <code>methods</code>  中 要么使用 <code>箭头函数</code> 直接写在里面 否则 this 指向会出现问题</p>
+<h2 id="自定义事件绑定"><a class="markdownIt-Anchor" href="#自定义事件绑定">#</a> 自定义事件绑定</h2>
+<p>通过在父组件模板结构标签上进行绑定自定义事件，以此传递给子组件</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">&lt;Student v-on:<span class="hljs-attribute">testDemo</span>=<span class="hljs-string">&quot;demo&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p>可以看做为  给 Student 组件绑定了一个  <code>&quot;testDemo&quot;</code>  事件 只要 test 被触发， <code>demo函数就会被调用</code> <br>
+父组件给子组件绑定一个自定义事件，实现子给父传递数据</p>
+<p>父组件的 demo 函数，谁接收数据，回调函数就在谁的内部</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-comment">// 接收Student传递过来的参数</span><br>  <span class="hljs-title function_">demo</span>(<span class="hljs-params">x</span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;demo被调用了,testDemo事件被触发&quot;</span>, x);<br>  &#125;,<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h3 id="然后是子组件"><a class="markdownIt-Anchor" href="#然后是子组件">#</a> 然后是子组件</h3>
+<p>给按钮绑定一个点击事件来触发自定义事件<br>
+语法: <code>this.$emit(&quot;父组件传递的自定义事件名&quot;, 需要传递的子组件数据);</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;getStudentName&quot;</span>&gt;</span>把学生名传递给APP(触发事件)<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">getStudentName</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 利用点击事件触发该组件 app组件传递过来的 testDemo 事件 ，并且传递参数</span><br>    <span class="hljs-variable language_">this</span>.$emit(<span class="hljs-string">&quot;testDemo&quot;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>  &#125;,<br></code></pre></td></tr></table></figure>
+<p><img src="https://image.dcaoao.com/image/202301121935069.png" srcset="/img/loading.gif" lazyload alt=""><br>
+<a target="_blank" rel="noopener" href="http://xn--this-9k7j986j23c.name">这里的 this.name</a> 为 <code>名字</code></p>
+<p>以此，父组件中的 demo 函数接收到参数值: <code>'名字'</code> , 就可以进行使用了</p>
+<h2 id="自定义事件绑定-ref方式"><a class="markdownIt-Anchor" href="#自定义事件绑定-ref方式">#</a> 自定义事件绑定 ref 方式</h2>
+<p>也是首先在父组件的模板标签中，为子组件传递自定义事件，使用 <code>ref</code>  方式</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf">&lt;Student ref<span class="hljs-operator">=</span><span class="hljs-string">&quot;testStudent&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>然后在 mounted 配置项中，写入触发操作<br>
+在 refs 上的  <code>testStudent</code>  如果 <code>testDemoRef</code>  事件被触发，则调用 <code>refDemo</code>  函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">refDemo</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;refDemo函数被调用了,testDemoRef事件被触发&quot;</span>);<br>  &#125;,<br>&#125;,<br><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$refs</span>.<span class="hljs-property">testStudent</span>.$on(<span class="hljs-string">&quot;testDemoRef&quot;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">refDemo</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h3 id="子组件操作"><a class="markdownIt-Anchor" href="#子组件操作">#</a> 子组件操作</h3>
+<p>语法:<br>
+ <code>this.$emit(&quot;事件名称&quot;, 要传递的子组件参数);</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">&quot;getStudentName&quot;</span>&gt;</span>Ref触发事件<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">getStudentName</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">this</span>.$emit(<span class="hljs-string">&quot;testDemoRef&quot;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span>);<br>  &#125;,<br></code></pre></td></tr></table></figure>
+<h2 id="解绑事件"><a class="markdownIt-Anchor" href="#解绑事件">#</a> 解绑事件</h2>
+<p>函数被触发后，执行解绑事件  <code>$off('xxx')</code> <br>
+ 解绑 <code>一个</code> 自定义事件<br>
+ <code>this.$off(&quot;testDemo&quot;);</code> <br>
+ 解绑 <code>多个</code> 自定义事件（数组字符串形式）<br>
+ <code>this.$off([&quot;testDemo&quot;, &quot;testRef&quot;]);</code> <br>
+ 解绑所有自定义事件<br>
+ <code>this.$off();</code></p>
+<p>自定义事件被解绑之后，无法再次通过调用触发自定义事件，除非被再次绑定</p>
+<h1 id="全局事件总线"><a class="markdownIt-Anchor" href="#全局事件总线">#</a> 全局事件总线</h1>
+<p>全局事件总线<br>
+一。一种组件之间的通信方式，适用于 <code>任意组件间通信</code> <br>
+二。安装全局事件总线 在 main.js 中，创建 vm 实例之前 插入 <code>Vue.prototype.$bus = new Vue()</code> <br>
+ 三。使用事件总线<br>
+ 1. 接收数据 A 组件接收数据 则在 A 组件中给 $bus 绑定自定义事件，事件的回调则留在 A 组件自身</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">demo</span>(<span class="hljs-params">data</span>)&#123;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)&#125;<br>&#125;,<br><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$on(<span class="hljs-string">&#x27;xxx&#x27;</span>,<span class="hljs-variable language_">this</span>.<span class="hljs-property">demo</span>)<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>2. 提供数据，B 组件提供数据 则在 B 组件当中键入<br>
+ <code>this.$bus.$emit('xxx',数据)</code></p>
+<p>四。最好在 beforeDestroy 生命周期钩子中，使用 $off 去解绑当前组件所用到的事件，防止重名占用</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$off(<span class="hljs-string">&quot;SendName&quot;</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h3 id="挂载全局事件总线"><a class="markdownIt-Anchor" href="#挂载全局事件总线">#</a> 挂载全局事件总线</h3>
+<p><img src="https://image.dcaoao.com/image/202301121948908.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="使用全局事件总线bus来传递参数到同级组件中"><a class="markdownIt-Anchor" href="#使用全局事件总线bus来传递参数到同级组件中">#</a> 使用全局事件总线 $bus 来传递参数到同级组件中</h2>
+<p>A 组件要传参到 B 组件，两个组件之间是兄弟关系</p>
+<p>A 组件定义一个函数，使用全局事件总线传参到 B 组件<br>
+语法: <code>this.$bus.$emit(&quot;自定义事件名&quot;, 传递的数据);</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">methods: &#123;<br>  <span class="hljs-regexp">//</span> 使用全局事件总线<span class="hljs-variable">$bus</span>来传递参数到同级组件中<br>  send() &#123;<br>    this.<span class="hljs-variable">$bus</span>.<span class="hljs-variable">$emit</span>(<span class="hljs-string">&quot;SendName&quot;</span>, this.name);<br>  &#125;,<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>B 组件准备接收 A 组件传递过来的参数，最好写在 <code>mounted</code>  当中<br>
+语法:  <code>this.$bus.$on(&quot;自定义事件名&quot;, 回调函数)</code> <br>
+ 这个回调函数可以写在 <code>methods</code>  当中，也可以直接使用箭头函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$on(<span class="hljs-string">&quot;SendName&quot;</span>, <span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;我是School,收到Student传递来的参数:&quot;</span>, data);<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>使用全局事件总线传递完毕后，最好销毁一下自定义事件，否则容易引起重名，导致事件错乱，因为全局事件总线是所有组件都可以使用的<br>
+使用生命周期钩子，销毁流程开始</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$off(<span class="hljs-string">&quot;SendName&quot;</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
                 
               </div>
             

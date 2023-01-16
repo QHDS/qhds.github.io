@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.dcaoao.com/image/202212292231924.png">
 <meta property="article:published_time" content="2022-12-29T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-12T11:54:33.248Z">
+<meta property="article:modified_time" content="2023-01-16T14:21:19.008Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          51k 字
+          55k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          429 分钟
+          463 分钟
         
       </span>
     
@@ -966,6 +966,85 @@ v-if : 条件渲染 (动态控制节点是否存在)<br>
 <p>使用全局事件总线传递完毕后，最好销毁一下自定义事件，否则容易引起重名，导致事件错乱，因为全局事件总线是所有组件都可以使用的<br>
 使用生命周期钩子，销毁流程开始</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">$bus</span>.$off(<span class="hljs-string">&quot;SendName&quot;</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h1 id="消息订阅与发布"><a class="markdownIt-Anchor" href="#消息订阅与发布">#</a> 消息订阅与发布</h1>
+<p>一。一种组件间的通讯方式，适用于 <code>任意组件</code> 通信<br>
+二。安装步骤</p>
+<ol>
+<li><code>npm i pubsub-js</code> <br>
+2. 引入  <code>import pubsub from &quot;pubsub-js&quot;</code> <br>
+3. 接收数据 A 组件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 使用pubsub-js接收数据，其内部的箭头函数也可以写在methods中</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">pubid</span> = pubsub.<span class="hljs-title function_">subscribe</span>(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msgName, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据名:&quot;</span> + msgName);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据:&quot;</span> + data);<br>  &#125;);<br>&#125;,  <span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 使用pubsub-js接收数据，其内部的箭头函数也可以写在methods中</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">pubid</span> = pubsub.<span class="hljs-title function_">subscribe</span>(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msgName, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据名:&quot;</span> + msgName);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据:&quot;</span> + data);<br>  &#125;);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>4. 提供数据 B 组件</p>
+  <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">// 使用pubsub-js发送数据</span><br>   pubsub.publish(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-keyword">this</span>.Vue);<br></code></pre></td></tr></table></figure>
+<p>5. 与全局事件总线相同，最好在结束钩子内使用<br>
+ <code>pubsub.unsubscribe(this.pubid);</code>  取消订阅</p>
+<h2 id="发送数据"><a class="markdownIt-Anchor" href="#发送数据">#</a> 发送数据</h2>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript">  <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-title class_">Vue</span>: <span class="hljs-string">&quot;Vue学习&quot;</span>,<br>    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;名字&quot;</span>,<br>    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>,<br>  &#125;;<br>&#125;,<br><span class="hljs-attr">methods</span>: &#123;<br>  <span class="hljs-title function_">send</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-comment">// 使用pubsub-js发送数据</span><br>    pubsub.<span class="hljs-title function_">publish</span>(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">Vue</span>);<br>  &#125;,<br></code></pre></td></tr></table></figure>
+<h2 id="接收数据"><a class="markdownIt-Anchor" href="#接收数据">#</a> 接收数据</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">mounted</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 使用pubsub-js接收数据，其内部的箭头函数也可以写在methods中</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">pubid</span> = pubsub.<span class="hljs-title function_">subscribe</span>(<span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-function">(<span class="hljs-params">msgName, data</span>) =&gt;</span> &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据名:&quot;</span> + msgName);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;这是接收的数据:&quot;</span> + data);<br>  &#125;);<br>&#125;,<br><span class="hljs-title function_">beforeDestroy</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 取消订阅消息</span><br>  pubsub.<span class="hljs-title function_">unsubscribe</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">pubid</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h1 id="vue代理服务器"><a class="markdownIt-Anchor" href="#vue代理服务器">#</a> Vue 代理服务器</h1>
+<p>代理服务器用于解决 ajax 请求跨域问题，在 vue 中有两种开启方式</p>
+<h2 id="方式一"><a class="markdownIt-Anchor" href="#方式一">#</a> 方式一</h2>
+<p>在 <code>Vue.config.js</code>  中添加如下配置</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">  <span class="hljs-regexp">//</span>开启代理服务器（方式一） 简单开启<br>devServer: &#123;<br>  <span class="hljs-regexp">//</span> 需要代理的服务器地址<br>  proxy: <span class="hljs-string">&#x27;http://localhost:5000&#x27;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<p>然后组件中请求的地址改成本机地址即可<br>
+此刻请求  <code>http://localhost:8080/students</code> <br>
+ 等于请求  <code>http://localhost:5000/students</code></p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs moonscript">  axios.get(<span class="hljs-string">&quot;http://localhost:8080/students&quot;</span>).<span class="hljs-keyword">then</span>(<br>    <span class="hljs-function"><span class="hljs-params">(response)</span> =&gt;</span> &#123;<br>      console.log(<span class="hljs-string">&quot;请求成功&quot;</span>, response.data);<br>    &#125;,<br>    <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">error</span>)</span> =&gt;</span> &#123;<br>      console.log(<span class="hljs-string">&quot;请求失败&quot;</span>, <span class="hljs-built_in">error</span>.message);<br>    &#125;<br>  );<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>1. 配置简单 请求资源时直接发给前端即可<br>
+ 2. 缺点：不能配置多个代理 不能灵活的控制是否走代理<br>
+ 3. 工作方式 如果请求了前端中已有的资源，则 <code>优先返回前端的内容</code> ，而不是代理服务器的内容</p>
+<h2 id="方式二"><a class="markdownIt-Anchor" href="#方式二">#</a> 方式二</h2>
+<p><code>Vue.config.js</code>  配置具体代理规则</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs awk">devServer: &#123;<br>  proxy: &#123;<br>    <span class="hljs-regexp">//</span> 匹配所有/server1 开头的请求路径<br>    <span class="hljs-string">&#x27;/server1&#x27;</span>: &#123;<br>      <span class="hljs-regexp">//</span> 重要 正则表达式，将<span class="hljs-regexp">/server1替换为空，否则其会请求到目标服务器的 /</span>server1路径下<br>      pathRewrite: &#123; <span class="hljs-string">&#x27;^/server1&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span> &#125;,<br>      <span class="hljs-regexp">//</span> 代理目标的基础路径<br>      target: <span class="hljs-string">&#x27;http://localhost:5000&#x27;</span>,<br>      <span class="hljs-regexp">//</span> ws协议<br>      ws: true,<br>      <span class="hljs-regexp">//</span> 是否欺骗请求服务器，如果开启，则欺骗服务器请求来自与其同源 ，关闭则规规矩矩本地<br>      changeOrigin: true<br>    &#125;,<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>此刻，组件内请求 <code>http://localhost:8080/server1/students</code>  的请求，会经过代理服务器<br>
+但是， <code>http://localhost:8080/server2/students</code>  的请求则不会，而是直接请求本机</p>
+<p>优点：可以配置多个代理，灵活的控制请求 <code>是否走代理</code> <br>
+缺点：配置略微繁琐，请求资源时必须加 <code>前缀</code></p>
+<h1 id="vuex插件"><a class="markdownIt-Anchor" href="#vuex插件">#</a> Vuex 插件</h1>
+<p>一.vuex 的概念<br>
+在 vue 中实现集中式数据的管理，是一个 vue 插件，对 vue 应用中的多个组件的共享状态进行集中式的管理 (读，写数据) 也是一种 <code>组件间通信</code> 的方式，而且适用于任意组件通信<br>
+二。何时使用？<br>
+ 多个组件需要共享数据时</p>
+<h2 id="安装vuex"><a class="markdownIt-Anchor" href="#安装vuex">#</a> 安装 Vuex</h2>
+<p>1. 安装 vuex</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm <span class="hljs-selector-tag">i</span> vuex<span class="hljs-keyword">@3</span><br></code></pre></td></tr></table></figure>
+<p>需要注意的是，vue2 只支持 vuex3 的版本  对应的  vue3 只支持 vuex4 的版本，需要安装对应的 vuex 版本，否则会报错</p>
+<p>2. 创建  <code>src/store/index.js</code>  文件</p>
+<p>该文件用于创建 Vuex 中最为核心的 <code>store</code></p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs pf">// 该文件用于创建 Vuex 中最为核心的store<br><br>// 引入Vue<br>import Vue <span class="hljs-keyword">from</span> &#x27;vue&#x27;<br>// 引入vuex<br>import Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vuex&quot;</span><br><br>// 使用vuex插件<br>Vue.use(Vuex)<br><br>// 准备 actions 用于响应组件中的动作<br><span class="hljs-keyword">const</span> actions = &#123;&#125;<br><br>// 准备 mutations 用于操作数据<br><span class="hljs-keyword">const</span> mutations = &#123;&#125;<br><br>// 准备 <span class="hljs-keyword">state</span> 用于存储数据<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">state</span> = &#123;&#125;<br><br><br>// 创建并暴露store<br>export <span class="hljs-keyword">default</span> new Vuex.Store(&#123;<br>    actions,<br>    mutations,<br>    <span class="hljs-keyword">state</span>,<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>3. 在 main.js 中，引入这个 js</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean"><span class="hljs-comment">// 引入vuex所创建的store</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./store/index&quot;</span><br></code></pre></td></tr></table></figure>
+<p>并且在 main.js 创建实例的同时，将其引入</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-keyword">new</span> Vue(&#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> h(App),<br>  <span class="hljs-comment">// 创建实例的同时引入vuex的store</span><br>  store,<br>&#125;).<span class="hljs-symbol">$mou</span>nt(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="vuex的使用"><a class="markdownIt-Anchor" href="#vuex的使用">#</a> Vuex 的使用</h2>
+<p>模板内读取 Vuex 的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>t</mi><mi>o</mi><mi>r</mi><mi>e</mi><mtext>的数据</mtext><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">store的数据
+`</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">e</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">据</span><span class="mord">‘</span></span></span></span>store.state.xxx`</p>
+<h3 id="第一步"><a class="markdownIt-Anchor" href="#第一步">#</a> 第一步</h3>
+<p>将数据传递到 <code>$store</code>  内<br>
+语法:  <code>this.$store.dispatch(&quot;传递的方法名&quot;, 传递的值);</code></p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs kotlin">del() &#123;<br>  <span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">&quot;jian&quot;</span>, <span class="hljs-keyword">this</span>.<span class="hljs-keyword">val</span>);<br>&#125;,<br></code></pre></td></tr></table></figure>
+<h3 id="第二步"><a class="markdownIt-Anchor" href="#第二步">#</a> 第二步</h3>
+<p>在 store 内的 index.js 文件内  <code>actions</code>  用于接收组件内传递过来的数据，并将其预处理，判断条件，延时请求之类</p>
+<p>响应组件传递过来的:  <code>jian</code>  动作<br>
+函数式，接收两个参数， <code>context.commit</code>  用于将其推送到 <code>mutations</code>  内操作数据， <code>value</code>  则就是组件传递过来的值</p>
+<p><code>context.commit('组件中传递过来的动作名', 组件传递过来的值，也就是 value所携带的值)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> actions = &#123;<br>    <span class="hljs-title function_">jian</span>(<span class="hljs-params">context, value</span>) &#123;<br>        <span class="hljs-comment">// 将其转发到mutations中,也可以在此写一些判断,ajax请求之类</span><br>        context.<span class="hljs-title function_">commit</span>(<span class="hljs-string">&#x27;jian&#x27;</span>, value)<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="第三步"><a class="markdownIt-Anchor" href="#第三步">#</a> 第三步</h3>
+<p><code>mutations</code>  准备操作数据<br>
+准备操作 state 中的值，使用组件中传递过来的值，value 也是接收的组件传递的值</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs pf"><span class="hljs-keyword">const</span> mutations = &#123;<br>    jian(<span class="hljs-keyword">state</span>, value) &#123;<br>        <span class="hljs-keyword">state</span>.sum -= value<br>    &#125;,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="第四步"><a class="markdownIt-Anchor" href="#第四步">#</a> 第四步</h3>
+<p>存储数据，这个要在第三步操作数据之前，将其提前准备好</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs pf">// 准备 <span class="hljs-keyword">state</span> 用于存储数据<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">state</span> = &#123;<br>    sum: <span class="hljs-number">0</span>,<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="组件使用"><a class="markdownIt-Anchor" href="#组件使用">#</a> 组件使用</h3>
+<p>模板内读取数据: <code>$store.state.sum</code> <br>
+ 组件函数传递数据:  <code>this.$store.dispatch(&quot;传递的方法名&quot;, 传递的值);</code> <br>
+ 如果数据不需要处理，比如说判断条件，延时请求，发送 ajax 请求等，可以跳过 actions 阶段<br>
+也就是: <code>this.$store.dispatch(&quot;传递的方法名&quot;, 传递的值);</code>  传递数据， <code>actions</code>  数据预处理阶段</p>
+<p>直接去  <code>mutations</code>  操作数据，语法:   <code>this.$store.commit(&quot;传递的方法名&quot;, 传递的值);</code></p>
+
                 
               </div>
             

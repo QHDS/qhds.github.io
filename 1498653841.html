@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://image.dcaoao.com/image/202212292231924.png">
 <meta property="article:published_time" content="2022-12-29T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-01-16T14:21:19.008Z">
+<meta property="article:modified_time" content="2023-01-18T14:29:16.703Z">
 <meta property="article:author" content="稻草">
 <meta property="article:tag" content="学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          55k 字
+          62k 字
         
       </span>
     
@@ -275,7 +275,7 @@
         
         
         
-          463 分钟
+          517 分钟
         
       </span>
     
@@ -1044,6 +1044,104 @@ v-if : 条件渲染 (动态控制节点是否存在)<br>
  如果数据不需要处理，比如说判断条件，延时请求，发送 ajax 请求等，可以跳过 actions 阶段<br>
 也就是: <code>this.$store.dispatch(&quot;传递的方法名&quot;, 传递的值);</code>  传递数据， <code>actions</code>  数据预处理阶段</p>
 <p>直接去  <code>mutations</code>  操作数据，语法:   <code>this.$store.commit(&quot;传递的方法名&quot;, 传递的值);</code></p>
+<h2 id="26-mapstate与mapgetters"><a class="markdownIt-Anchor" href="#26-mapstate与mapgetters">#</a> 26 mapState 与 mapGetters</h2>
+<p>如果模板中要调用 vuex 中产生的值，则需要  <code>&#123;&#123;$store.state.sum&#125;&#125;</code>    <code>&#123;&#123;$store.getters.sumMax&#125;&#125;</code>  来调用，写在模板中，导致不美观而且不易观看</p>
+<p>可以使用 mapState 与 mapGetters 来生成计算属性，使模板中可以直接通过  <code>&#123;&#123;xxx&#125;&#125;</code>  来读取数据</p>
+<h3 id="第一步-引入mapstate与mapgetters"><a class="markdownIt-Anchor" href="#第一步-引入mapstate与mapgetters">#</a> 第一步。引入 mapState 与 mapGetters</h3>
+<p>import { mapState, mapGetters } from “vuex”;</p>
+<h3 id="mapstate"><a class="markdownIt-Anchor" href="#mapstate">#</a> mapState</h3>
+<p>mapState 读取 state 中的数据，并生成计算属性 (对象写法)  语法:  <code>...mapState(&#123;生成的计算属性名:'State内的数据名'&#125;) </code>  模板内使用计算属性名读取数据即可</p>
+<p>mapState 读取 state 中的数据，并生成计算属性 (数组写法)  语法: …mapState ([‘State 内的数据名’]) 数组写法直接写 State 内的数据名即可，生成的计算属性名与读取的数据名相同</p>
+<p>例: <code>  computed: &#123;...mapState([&quot;sum&quot;]),&#125;</code> <br>
+ 模板内则可以直接使用  <code>&lt;h1&gt;当前求和为:&#123;&#123; sum &#125;&#125;&lt;/h1&gt;</code>  访问到 state 中的数据<br>
+<img src="https://image.dcaoao.com/image/202301182157539.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="mapgetters"><a class="markdownIt-Anchor" href="#mapgetters">#</a> mapGetters</h3>
+<p>mapGetters 读取 getters 内的数据，并生成计算属性<br>
+ mapGetters 对象式写法 语法： <code> ...mapGetters(&#123;生成的计算属性名:'State内的数据名'&#125;),</code></p>
+<p>mapGetters 数组式写法 语法：  <code>...mapGetters(['State内的数据名']),</code></p>
+<p>例: <code>computed: &#123;...mapGetters([&quot;sumMax&quot;]),&#125;</code></p>
+<p>模板可以直接使用 <code>&lt;h1&gt;处理后的数据为:&#123;&#123; sumMax &#125;&#125;&lt;/h1&gt;</code>  访问到 vuex 中的 getters 数据</p>
+<h2 id="mapstate与mapgetters-mapactions"><a class="markdownIt-Anchor" href="#mapstate与mapgetters-mapactions">#</a> mapState 与 mapGetters mapActions</h2>
+<h3 id="第一步-引入mapstate与mapgetters-mapactions"><a class="markdownIt-Anchor" href="#第一步-引入mapstate与mapgetters-mapactions">#</a> 第一步。引入 mapState 与 mapGetters mapActions</h3>
+<p><code>import &#123; mapState, mapGetters, mapActions, mapMutations &#125; from &quot;vuex&quot;;</code></p>
+<h3 id="mapactions"><a class="markdownIt-Anchor" href="#mapactions">#</a> mapActions</h3>
+<p>mapActions 方法，生成与  <code>actions</code>  对话的方法 即  <code>this.$store.dispatch(&quot;ji&quot;, this.val);</code> <br>
+ 对象写法<br>
+ <code> ...mapActions(&#123; 方法名: &quot;actions内的数据名&quot; &#125;),</code> <br>
+ 数组写法<br>
+ <code>...mapActions([&quot;actions内的数据名&quot;]),</code> <br>
+mapMutations 方法 用于生成与 <code>mutations</code>  对话的方法，即 <code>$store.commit(xxx)</code></p>
+<h3 id="mapmutations"><a class="markdownIt-Anchor" href="#mapmutations">#</a> mapMutations</h3>
+<p>mapMutations 方法 用于生成与 <code>mutations</code>  对话的方法，即 <code>$store.commit(xxx)</code></p>
+<p>对象式写法<br>
+ <code>...mapMutations(&#123;方法名: &quot;actions内的数据名&quot;&#125;)</code> <br>
+ 数组式写法<br>
+ <code>...mapMutations([&quot;actions内的数据名&quot;])</code></p>
+<p>mapActions 与 mapMutations 使用时，如果需要传递参数，就像 <code>this.$store.commit(&quot;jia&quot;, this.val);</code>  与 <code>this.$store.dispatch(&quot;jian&quot;, this.val);</code>  传递 this.val 值</p>
+<p>则在模板中使用时，需要在绑定事件中传递参数:  <code>&lt;button @click=&quot;ji(val)&quot;&gt;按钮&lt;/button&gt;</code></p>
+<h2 id="使用vuex后多组件共享数据"><a class="markdownIt-Anchor" href="#使用vuex后多组件共享数据">#</a> 使用 vuex 后，多组件共享数据</h2>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs stylus">computed: &#123;<br>  <span class="hljs-comment">// mapState 读取state中的数据</span><br>  ..<span class="hljs-selector-class">.mapState</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;sum&quot;</span>, <span class="hljs-string">&quot;personList&quot;</span>]</span>),<br><br>  <span class="hljs-comment">// mapGetters读取getters内的数据,并生成计算属性</span><br>  ..<span class="hljs-selector-class">.mapGetters</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;sumMax&quot;</span>]</span>),<br>&#125;,<br>methods: &#123;<br>  ..<span class="hljs-selector-class">.mapActions</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;ji&quot;</span>, <span class="hljs-string">&quot;timeadd&quot;</span>]</span>),<br>  ..<span class="hljs-selector-class">.mapMutations</span>(<span class="hljs-selector-attr">[<span class="hljs-string">&quot;jia&quot;</span>, <span class="hljs-string">&quot;jian&quot;</span>]</span>),<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>读取 getters 数据:  <code>$store.getters.xxx</code> <br>
+ 读取 state 数据:  <code>$store.state.xxx</code> <br>
+ 模板内读取需要加上 this</p>
+<h2 id="vuex-模块化编码"><a class="markdownIt-Anchor" href="#vuex-模块化编码">#</a> vuex 模块化编码</h2>
+<p>当 store/index.js 中的文件需要模块化分级时，可以将配置分为多个对象</p>
+<p><img src="https://image.dcaoao.com/image/202301182208546.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>对象内又分别包含 actions,mutations,state,getters 等对象，用于响应动作，处理动作，存储数据，加工存储数据</p>
+<p><img src="https://image.dcaoao.com/image/202301182209763.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>再将对象分别进行暴露操作，方便组件使用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 模块暴露</span><br>export <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vuex</span>.<span class="hljs-title function_ invoke__">Store</span>(&#123;<br>    <span class="hljs-attr">countAbout</span>: countOptions,<br>    <span class="hljs-attr">personAbout</span>: personOptions<br>&#125;)<br><br></code></pre></td></tr></table></figure>
+<p>组件使用时，使用 mapState mapGetters mapActions mapMutations 配置，在其数组前方添加暴露名称即可正常使用<br>
+语法: <code>...mapState(&quot;暴露配置项&quot;[&quot;配置项内的属性&quot;]),</code></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs stylus">computed: &#123;<br>  <span class="hljs-comment">// mapState 读取countOptions  中的数据</span><br>  ..<span class="hljs-selector-class">.mapState</span>(<span class="hljs-string">&quot;countOptions&quot;</span><span class="hljs-selector-attr">[<span class="hljs-string">&quot;sum&quot;</span>]</span>),<br>  <span class="hljs-comment">// mapState 读取personOptions  中的数据</span><br>  ..<span class="hljs-selector-class">.mapState</span>(<span class="hljs-string">&quot;personOptions&quot;</span><span class="hljs-selector-attr">[<span class="hljs-string">&quot;personList&quot;</span>]</span>),<br><br>  <span class="hljs-comment">// mapGetters读取getters内的数据,并生成计算属性</span><br>  ..<span class="hljs-selector-class">.mapGetters</span>(<span class="hljs-string">&quot;countOptions&quot;</span><span class="hljs-selector-attr">[<span class="hljs-string">&quot;sumMax&quot;</span>]</span>),<br>&#125;,<br>methods: &#123;<br>  <span class="hljs-comment">// mapMutations方法 用于生成与`mutations`对话的方法,即$store.commit(xxx)</span><br>  ..<span class="hljs-selector-class">.mapActions</span>(<span class="hljs-string">&quot;countOptions&quot;</span><span class="hljs-selector-attr">[(<span class="hljs-string">&quot;ji&quot;</span>, <span class="hljs-string">&quot;timeadd&quot;</span>)]</span>),<br>  ..<span class="hljs-selector-class">.mapMutations</span>(<span class="hljs-string">&quot;countOptions&quot;</span><span class="hljs-selector-attr">[(<span class="hljs-string">&quot;jia&quot;</span>, <span class="hljs-string">&quot;jian&quot;</span>)]</span>),<br>&#125;,<br></code></pre></td></tr></table></figure>
+<p>接下来模板即可正常 <code>&#123;&#123;sum&#125;&#125;</code>  调用 store 内的属性值了</p>
+<h1 id="路由的基本使用"><a class="markdownIt-Anchor" href="#路由的基本使用">#</a> 路由的基本使用</h1>
+<p>路由 一个路由 (route) 就是一组映射关系 (key - value), 多个路由需要路由器 (router) 进行管理<br>
+前端路由 key 是路径 value 是组件</p>
+<p>由路由进行管理的，叫路由组件，一般存放于  <code>src/pages</code>  文件夹中<br>
+普通调用的，叫一般组件或者普通组件 存放于  <code>components</code>  文件夹中</p>
+<h2 id="一基本使用"><a class="markdownIt-Anchor" href="#一基本使用">#</a> 一。基本使用</h2>
+<p>1. 安装  <code>vue - router</code>  命令<br>
+ Vue 路由，是 vue 中的一个插件<br>
+ vue-router3 版本只能用作 vue2 版本中<br>
+ vue-router4 版本只能用作 vue3 版本中<br>
+安装 vue-router</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">npm <span class="hljs-selector-tag">i</span> vue-router<span class="hljs-keyword">@3</span><br></code></pre></td></tr></table></figure>
+<p>2. 创建路由文件<br>
+在 <code>src/components/router</code>  文件夹中，创建 <code>index.js</code>  文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 改文件用于创建整个应用的路由器</span><br><br><span class="hljs-comment">// 引入VueRouter路由插件</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Vue</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueRouter</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><br><span class="hljs-comment">// 引入要路由的组件</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">About</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../components/about&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">Home</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../components/home&#x27;</span><br><br><span class="hljs-comment">// 创建路由器</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">VueRouter</span>(&#123;<br>    <span class="hljs-attr">routes</span>: [<br>        <span class="hljs-comment">// 创建路由规则</span><br>        &#123;<br>            <span class="hljs-comment">// 路由路径</span><br>            <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/about&#x27;</span>,<br>            <span class="hljs-comment">// 对应的路由组件</span><br>            <span class="hljs-attr">component</span>: <span class="hljs-title class_">About</span><br>        &#125;,<br>        &#123;<br>            <span class="hljs-attr">path</span>: <span class="hljs-string">&#x27;/home&#x27;</span>,<br>            <span class="hljs-attr">component</span>: <span class="hljs-title class_">Home</span><br>        &#125;<br>    ]<br>&#125;)<br></code></pre></td></tr></table></figure>
+<p>3. 应用 VueRouter 路由插件</p>
+<p>在 <code>main.js</code>  文件中，引入以下文件，并且创建 vm 实例时创建路由器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 引入VueRouter路由插件</span><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">VueRouter</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-comment">// 引入路由器</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span><br><span class="hljs-comment">// 应用VueRouter路由插件</span><br><span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">VueRouter</span>)<br>-------------------<br><br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Vue</span>(&#123;<br>  <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> <span class="hljs-title function_">h</span>(<span class="hljs-title class_">App</span>),<br>  store,<br>  <span class="hljs-comment">// 创建实例的同时创建路由器</span><br>  <span class="hljs-attr">router</span>: router<br><br>&#125;).$mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>4. 在模板中，应用路由标签</p>
+<p><code>&lt;router-link&gt;</code>  标签 用于切换路由，拥有两个配置项 to 与 active - class 本质渲染后为 a 标签<br>
+ <code>active- class</code>  配置项用于那个路由规则被激活，该标签就应用某个 class 属性<br>
+例 <code>&lt;router - link class=&quot;list-group-item&quot; to = &quot;/about&quot; active - class=&quot;active&quot;&gt; About&lt;/router - link&gt;</code></p>
+<p>显示路由标签 router - view 指定组件显示的位置<br>
+ <code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;row&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-xs-2 col-xs-offset-2&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-group&quot;</span>&gt;</span><br>      <span class="hljs-comment">&lt;!-- &lt;a class=&quot;list-group-item active&quot; href=&quot;./about.html&quot;&gt;About&lt;/a&gt;</span><br><span class="hljs-comment">      &lt;a class=&quot;list-group-item&quot; href=&quot;./home.html&quot;&gt;Home&lt;/a&gt; --&gt;</span><br><br>      <span class="hljs-comment">&lt;!-- 切换路由 router-link 标签  to属性为要跳转的路径 active-class属性为 谁被激活，谁就应用某个样式--&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-group-item&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/about&quot;</span> <span class="hljs-attr">active-class</span>=<span class="hljs-string">&quot;active&quot;</span></span><br><span class="hljs-tag">        &gt;</span>About&lt;/router-link<br>      &gt;<br>      <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;list-group-item&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/home&quot;</span> <span class="hljs-attr">active-class</span>=<span class="hljs-string">&quot;active&quot;</span></span><br><span class="hljs-tag">        &gt;</span>Home&lt;/router-link<br>      &gt;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;col-xs-6&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;panel&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;panel-body&quot;</span>&gt;</span><br>        <span class="hljs-comment">&lt;!-- 显示路由标签 router-view 指定组件显示的位置 --&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="多级路由嵌套路由"><a class="markdownIt-Anchor" href="#多级路由嵌套路由">#</a> 多级路由 (嵌套路由)</h2>
+<p>1. 配置路由规则<br>
+二级路由的配置项为  <code>children</code>  其内部与一级路由相同，需要注意的是， <code>path</code>  不需要写  <code>/</code>  直接写路径即可<br>
+二级路由的跳转则是在一级路由的基础上，直接添加二级路由内 <code>path</code>  的地址即可</p>
+<p><code>&lt; router-link class=&quot;list-group-item&quot; active-class=&quot;active&quot; to = &quot;/home/message&quot;&gt; Message &lt;/router-link&gt;</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br> routes: [<br>    <span class="hljs-regexp">//</span> 创建路由规则<br>    &#123;<br>        <span class="hljs-regexp">//</span> 路由路径<br>        path: <span class="hljs-string">&#x27;/about&#x27;</span>,<br>        <span class="hljs-regexp">//</span> 对应的路由组件<br>        component: About<br>    &#125;,<br>    <span class="hljs-regexp">//</span> Home组件嵌套路由,也叫二级路由<br>    &#123;<br>        path: <span class="hljs-string">&#x27;/home&#x27;</span>,<br>        component: Home,<br>        <span class="hljs-regexp">//</span> 二级路由<br>        children: [<br>            &#123;<br>                path: <span class="hljs-string">&#x27;message&#x27;</span>,<br>                component: Message<br>            &#125;,<br>            &#123;<br>                path: <span class="hljs-string">&#x27;news&#x27;</span>,<br>                component: News<br>            &#125;<br>        ]<br>    &#125;<br>]<br></code></pre></td></tr></table></figure>
+<h2 id="路由的query参数"><a class="markdownIt-Anchor" href="#路由的query参数">#</a> 路由的 query 参数</h2>
+<p>适用于数据过多，创建多个组件不现实时，使用 query 传递参数，使接收参数的组件达到一个组件多个页面的效果<br>
+一。传递参数<br>
+跳转并携带 query 参数，跳转路由并传递参数到路由组件 path 参数负责跳转的路径组件，query 参数负责要传递的参数，对象写法</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span></span></span><br><span class="hljs-tag"><span class="language-xml">  <span class="hljs-attr">:to</span>=<span class="hljs-string">&quot;&#123;</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">    path: &#x27;/home/message/detail&#x27;,</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">    query: &#123;</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">      id: p.id,</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">      title: p.title,</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">    &#125;,</span></span></span><br><span class="hljs-string"><span class="hljs-tag"><span class="language-xml">  &#125;&quot;</span></span></span><br><span class="hljs-tag"><span class="language-xml">  &gt;</span></span><span class="hljs-template-variable">&#123;&#123; <span class="hljs-name">p.title</span> &#125;&#125;</span><span class="language-xml">&lt;/router-link</span><br></code></pre></td></tr></table></figure>
+<p>二。接收参数<br>
+ <code>$route.query.id</code> <br>
+ <code>$route.query.title</code></p>
+<h2 id="路由命名"><a class="markdownIt-Anchor" href="#路由命名">#</a> 路由命名</h2>
+<p>路由命名<br>
+适用于跳转路径过长时，进行简化书写，需要跳转的 <code>:to</code>  为对象形式才可以使用</p>
+<p>一，给路由命名</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stata">routes: [<br>    <span class="hljs-comment">// 创建路由规则</span><br>    &#123;<br>        name:<span class="hljs-keyword">about</span><br>        path: &#x27;/<span class="hljs-keyword">about</span>&#x27;,<br>        component: <span class="hljs-keyword">About</span><br>    &#125;]<br></code></pre></td></tr></table></figure>
+<p>二，简化跳转</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">:to</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-template-variable">&#123;path: &#x27;about&#x27;,&#125;</span><span class="language-xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span>简化跳转&lt;/router-link</span><br></code></pre></td></tr></table></figure>
+<p>直接在跳转标签内输入路由名字即可使用，字符串形式</p>
 
                 
               </div>
